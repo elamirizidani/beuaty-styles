@@ -1,0 +1,57 @@
+header .navbar {
+  width: 100%;
+  background-color: transparent !important;
+}
+
+header .navbar.sticky {
+  z-index: 1000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: var(--white);
+  -webkit-transition: all 15ms ease-in-out;
+  -moz-transition: all 15ms ease-in-out;
+  -o-transition: all 15ms ease-in-out;
+  -ms-transition: all 15ms ease-in-out;
+  transition: all 15ms ease-in-out;
+  animation-name: stickyTransition;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  animation-fill-mode: both;
+  -webkit-box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
+  -moz-box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
+  box-shadow: 0 2px 3px rgba(96, 96, 96, 0.1);
+}
+
+@keyframes stickyTransition {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(1, -100%, 0);
+    transform: translate3d(1, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+header .headerIcon {
+  position: relative;
+  top: -0.4375rem;
+}
+header .roundpoint {
+  width: 16px;
+  height: 16px;
+  background: var(--light-red);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 11.2px;
+  line-height: 16px;
+  text-align: center;
+  font-stylee: normal;
+  position: absolute;
+  top: 3.2px;
+  right: -8px;
+}

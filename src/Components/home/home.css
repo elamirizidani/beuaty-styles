@@ -1,0 +1,31 @@
+.hero_section {
+  position: relative;
+  min-height: 750px;
+  background: url("../../assets/imgs/hero.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-attachment: fixed;
+  padding-top: 170px;
+  padding-bottom: 90px;
+}
+.hero-content-container {
+  background: #ffffff33;
+  border-radius: 6px;
+  padding: 60px 40px;
+}
+
+.creterias {
+  background: var(--white);
+  padding: 60px 0;
+}
+
+.card-icon-container {
+  font-size: 36px;
+  color: #ff6a00;
+}
+
+.shop-by-category {
+  background: var(--light-white);
+  padding: 60px 0;
+}
