@@ -28,3 +28,235 @@
 .shop-by-category {
   padding: 60px 0;
 }
+.category-wrapper{
+  position: relative;
+}
+
+.category-wrapper::after{
+  position: absolute;
+  content: "";
+  top: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  border-radius:50%;
+  background: #00000080;
+
+}
+.category-name{
+  font-family: "Kanit";
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+letter-spacing: 0%;
+text-transform: capitalize;
+
+}
+.section-title{
+  font-family: Cinzel;
+font-weight: 700;
+font-size: 32px;
+line-height: 100%;
+letter-spacing: 0px;
+text-transform: uppercase;
+
+}
+.order_now{
+  height: fit-content;
+  width: fit-content;
+}
+
+/* With full Width section styles */
+.left-container{
+  min-height: 513px;
+}
+.right-container{
+  background: #BE8F451A;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+
+
+}
+.right-inner-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px
+}
+.right-inner-wrapper h2{
+  text-align: center;
+}
+.right-inner-wrapper .text-center{
+  font-family: "Kanit";
+font-weight: 300;
+font-size: 16px;
+line-height: 27px;
+letter-spacing: 0px;
+text-align: center;
+text-transform: capitalize;width: 70%;
+
+
+}
+/* Curated section styles */
+.curated-parent{
+  padding-top: 100px;
+}
+.curated-column-wrapper{
+  gap: 32px;
+  padding: 0 0 32px 0;
+
+}
+.curated{
+display: flex;
+flex-direction: column;
+gap: 16px;
+padding-top: 40px;
+padding-right: 40px;
+padding-bottom: 30px;
+padding-left: 40px;
+width: 48.7%;
+;
+}
+.curated-column{
+background: #E3ECE7;
+
+}
+.curated-column-right{
+  background: #F9F4ED;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.curated-img{
+  object-fit: cover;
+  height: 324px;
+  width: 100%;
+}
+.curated-column-right1{
+  max-height: 500px;
+  padding: 0;
+}
+.img-fluiding{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+ .curated-column-wrapper2{
+  padding-bottom: 100px;
+ }
+
+
+/* Tips and Routines section styles */
+.the-top-wrapper{
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #F9F4ED;
+}
+.tip-routes{
+  width: 100%;
+height: 308.94000244140625px;
+object-fit: cover;
+
+}
+.tip-card{
+  margin: 0;
+  padding: 0;
+  width: 31.8%;
+  
+}
+.tip-card span{
+  font-family: "Montserrat";
+font-weight: 400;
+font-size: 12px;
+line-height: 15.96px;
+letter-spacing: 0px;
+text-transform: capitalize;
+color: #141414;
+
+
+}
+.tip-card h4{
+  font-family: "Kanit";
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+letter-spacing: 0%;
+text-transform: capitalize;
+color: #090400;
+
+}
+
+/* Footer styles */
+.the-upper-container{
+  padding: 100px 0;
+
+}
+.inner-wrapper{
+  background-color: #141414;
+}
+.the-upper-container .footer-photo{
+     width: 100%;
+    height: 466px;
+    object-fit: cover;
+    object-position: center left;
+}
+.left-header{
+  font-family: "Cinzel";
+font-weight: 700;
+font-size: 32px;
+line-height: 100%;
+letter-spacing: 0px;
+text-transform: uppercase;
+
+}
+.inner-wrapper .flex-col{
+  background-color: #fff;
+}
+.inner-wrapper button{
+  background: #090400;
+  width: 25%;
+}
+.inner-wrapper input{
+  width: 75%;
+  border: none;
+}
+.inner-wrapper input:focus{
+  outline: none;
+}
+
+.middle-wrapper{
+  background: #090400;
+  padding-top: 100px;
+  padding-bottom: 30px;
+}
+
+.below-wrapper{
+  background-color: #090400;
+}
+.below-section{
+  border-top: 1px solid #262626;
+ padding-top: 24px;
+ padding-bottom: 25px;
+}
+
+.footer-menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px; /* Space between items */
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: #fff; /* Or your preferred color */
+  transition: color 0.3s ease;
+}
+
+.menu-item a:hover {
+  color: #4CAF50; /* Hover color */
+}

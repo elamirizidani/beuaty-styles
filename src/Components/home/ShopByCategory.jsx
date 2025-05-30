@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container } from 'react-bootstrap';
 import TitleStyled from '../reUsable/TitleStyled';
-import product from '../../assets/imgs/products/product.png'
+import product1 from '../../assets/imgs/products/product.png'
 import category from '../../assets/imgs/category.jpg'
+import product2 from '../../assets/imgs/product2.webp'
+import category2 from '../../assets/imgs/product3.webp'
+import product3 from '../../assets/imgs/product4.webp'
+import categor3 from '../../assets/imgs/product5.webp'
 import SectionContainer from '../reUsable/SectionContainer'
 
 function CustomCarousel({ children, responsive = {}, loop = true, autoplay = false, autoplayTimeout = 3000 }) {
@@ -96,6 +100,7 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
           transition: 'transform 0.3s ease',
           transform: `translateX(-${currentSlide * (100 / itemsToShow)}%)`,
           width: `${100 * (totalSlides / itemsToShow)}%`,
+          gap: "32px"
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -106,7 +111,7 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
             style={{ 
               flexShrink: 0,
               flexGrow: 0,
-              flexBasis: `${100 / totalSlides}%`,
+              flexBasis: `${90 / totalSlides}%`,
               width: `${100 / totalSlides}%`,
               padding: '0 10px',
               boxSizing: 'border-box',
@@ -125,10 +130,10 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
             key={index}
             onClick={() => goToSlide(index)}
             style={{
-              width: '10px',
+              width: currentSlide === index ? "25px" :'10px',
               height: '10px',
-              borderRadius: '50%',
-              backgroundColor: currentSlide === index ? '#000' : '#ccc',
+              borderRadius: currentSlide === index  ? "20px" : '50%',
+              backgroundColor: currentSlide === index ? '##FF6A00' : 'rgb(255 106 0 / 66%)',
               margin: '0 5px',
               padding: 0,
               border: 'none',
@@ -150,11 +155,11 @@ function ShopByCategory() {
   };
 
   const categories = [
-    { id: 1, name: "Category 1",img:product },
-    { id: 2, name: "Category 2",img:category },
-    { id: 3, name: "Category 2",img:product },
-    { id: 4, name: "Category 2",img:category },
-    { id: 5, name: "Category 2",img:product },
+    { id: 1, name: "Shampoos",img:product1 },
+    { id: 2, name: "Conditioners",img:product2 },
+    { id: 3, name: "Hair Oils",img:category2 },
+    { id: 4, name: "Hair Growth Treatments",img:product3 },
+    { id: 5, name: "Styling Gels and Creams",img:categor3 },
     { id: 6, name: "Category 2",img:category },
   ];
 
@@ -171,6 +176,7 @@ function ShopByCategory() {
         >
           {categories.map((category) => (
             <div 
+              className='category-wrapper'
               key={category.id} 
               style={{
                 backgroundImage: `url(${category.img})`,
@@ -186,7 +192,7 @@ function ShopByCategory() {
                 boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
               }}
             >
-              <h4>{category.name}</h4>
+              <h4 className='category-name'>{category.name}</h4>
             </div>
           ))}
         </CustomCarousel>
