@@ -19,8 +19,6 @@ function index() {
         <WithFullWidth />
         <CuratedKits />
         <TipsRoutines />
-        
-
     </>
   )
 }

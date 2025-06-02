@@ -10,7 +10,6 @@ export default function CuratedKits(){
          <Container className='flex-column gap-3 d-flex curated-parent'>
                  <Row className='justify-content-between'>
 
-            
                     <Col lg={6}><TitleStyled title={'Curated Kits for Everyday Care'} subtext={'Simplify your routine with handpicked product combos'}/></Col>
                     <Col lg={6} className='d-flex justify-content-end'><Link to='/' className='btn order_now'>Go Shop</Link></Col>
 

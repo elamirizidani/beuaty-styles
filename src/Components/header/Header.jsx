@@ -16,7 +16,7 @@ export default function Header() {
             navbarScroll
           >
             <Nav.Link as={Link} to='/'>Home</Nav.Link>
-            <Nav.Link  href="#action2">Book service</Nav.Link>
+            <Nav.Link  as={Link} to='/bookService'>Book service</Nav.Link>
             <Nav.Link href="#action3">Shop</Nav.Link>
             <Nav.Link as={Link} to="/contact">
               Contact us
