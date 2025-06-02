@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {Button,Container,Form,Nav,Navbar,NavDropdown} from 'react-bootstrap';
 import './header.css'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../MainLayout/AuthContext';
 export default function Header() {
+  const { isLoggedIn,logout,cartData } = useContext(AuthContext)
   return (
     <header>
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -17,7 +19,7 @@ export default function Header() {
           >
             <Nav.Link as={Link} to='/'>Home</Nav.Link>
             <Nav.Link  as={Link} to='/bookService'>Book service</Nav.Link>
-            <Nav.Link href="#action3">Shop</Nav.Link>
+            <Nav.Link as={Link} to='/shop'>Shop</Nav.Link>
             <Nav.Link as={Link} to="/contact">
               Contact us
             </Nav.Link>
@@ -29,10 +31,19 @@ export default function Header() {
             <Nav.Link href="#">
               <div className='headerIcon'>
                 <i class="bi bi-bag"></i>
-                <em className='roundpoint'>2</em>
+                <em className='roundpoint'>{cartData?.length}</em>
               </div>
             </Nav.Link>
-            <Link to='/' variant="outline-success" className='btn order_now'>Sign in/Sign Up</Link>
+            {
+              isLoggedIn ?
+              <>
+                <button onClick={()=>logout()} className="btn order_now">
+                    Sign Out
+                </button>
+              </>
+              :
+              <Link to='/login' variant="outline-success" className='btn order_now'>Sign in/Sign Up</Link>
+            }
           </div>
         </Navbar.Collapse>
       </Container>

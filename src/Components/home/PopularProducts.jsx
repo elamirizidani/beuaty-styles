@@ -1,128 +1,151 @@
-import React, { useEffect,useState } from 'react'
+import React, { useContext, useEffect,useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import TitleStyled from '../reUsable/TitleStyled'
 import { Link } from 'react-router-dom'
-import product from '../../assets/imgs/products/product.png'
+import productImage from '../../assets/imgs/products/product.png'
 import SectionContainer from '../reUsable/SectionContainer'
 import axios from 'axios'
-import { PRODUCTS } from '../../../utilty/data/products'
+import { PRODUCTS } from '../../../utilty/data/serverData'
+import { fetchData } from '../../../utilty/data/api';
+import { AuthContext } from '../../MainLayout/AuthContext'
+// const API_KEY = 'AIzaSyA7v3yfSk1WIxsHgCFMg0yym50Mlxrxlos';
 
-const API_KEY = 'AIzaSyA7v3yfSk1WIxsHgCFMg0yym50Mlxrxlos';
+// const userProfile = {
+//   hairType: 'curly',
+//   scalpCondition: 'dry',
+//   skinTone: 'medium',
+//   preferredFragrance: 'floral',
+// };
 
-const userProfile = {
-  hairType: 'curly',
-  scalpCondition: 'dry',
-  skinTone: 'medium',
-  preferredFragrance: 'floral',
-};
-
-const purchaseHistory = [
-  { productId: 'deep-conditioner' },
-  { productId: 'argan-oil' },
-];
+// const purchaseHistory = [
+//   { productId: 'deep-conditioner' },
+//   { productId: 'argan-oil' },
+// ];
 
 
 function PopularProducts() {
+  const {addToCart} = useContext(AuthContext)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const productDescriptions = PRODUCTS.map((p, i) => {
-          return `${i + 1}. ${p.name} – ${p.description}`;
-        }).join('\n');
+//     const productDescriptions = PRODUCTS.map((p, i) => {
+//           return `${i + 1}. ${p.name} – ${p.description}`;
+//         }).join('\n');
 
-    const prompt = `
-          You are a beauty product recommendation assistant.
+//     const prompt = `
+//           You are a beauty product recommendation assistant.
 
-          USER PROFILE:
-          - Hair type: ${userProfile.hairType}
-          - Scalp condition: ${userProfile.scalpCondition}
-          - Skin tone: ${userProfile.skinTone}
-          - Preferred fragrance: ${userProfile.preferredFragrance}
+//           USER PROFILE:
+//           - Hair type: ${userProfile.hairType}
+//           - Scalp condition: ${userProfile.scalpCondition}
+//           - Skin tone: ${userProfile.skinTone}
+//           - Preferred fragrance: ${userProfile.preferredFragrance}
 
-          PAST PURCHASES:
-          ${purchaseHistory.map(p => `- ${p.productId}`).join('\n')}
+//           PAST PURCHASES:
+//           ${purchaseHistory.map(p => `- ${p.productId}`).join('\n')}
 
-          AVAILABLE PRODUCTS:
-          ${productDescriptions}
+//           AVAILABLE PRODUCTS:
+//           ${productDescriptions}
 
-          Based on the profile and past purchases, choose the 6 best products from the list above and return them as a JSON array using this format:
+//           Based on the profile and past purchases, choose the 6 best products from the list above and return them as a JSON array using this format:
 
-          [
-          {
-              "id": "",
-              "name": "",
-              "price": "",
-              "image": "",
-              "description": "",
-              "reason": "Why it was recommended"
-          }
-          ]
+//           [
+//           {
+//               "id": "",
+//               "name": "",
+//               "price": "",
+//               "image": "",
+//               "description": "",
+//               "reason": "Why it was recommended"
+//           }
+//           ]
 
-          Only use products from the AVAILABLE PRODUCTS list.
-          Return only valid JSON without any explanation.
-        `;
-
-
+//           Only use products from the AVAILABLE PRODUCTS list.
+//           Return only valid JSON without any explanation.
+//         `;
 
 
-const getSuggestions = async ()=>{
-    try {
-        setLoading(true);
-    const res = await axios.post(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
-      {
-        contents: [{ parts: [{ text: prompt }] }],
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': API_KEY,
-        },
-      }
-    );
-    const aiResponseText = res.data.candidates?.[0]?.content?.parts?.[0]?.text;
-    let cleanResponse = aiResponseText;
-    cleanResponse = cleanResponse.replace(/```json|```/g, '');
-    cleanResponse = cleanResponse.trim();
 
-    const startIndex = cleanResponse.indexOf('[');
-        const endIndex = cleanResponse.lastIndexOf(']') + 1;
 
-        if (startIndex === -1 || endIndex === 0) {
-          throw new Error('Could not find valid JSON array in the response');
-        }
+// const getSuggestions = async ()=>{
+//     try {
+//         setLoading(true);
+//     const res = await axios.post(
+//       `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
+//       {
+//         contents: [{ parts: [{ text: prompt }] }],
+//       },
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'x-goog-api-key': API_KEY,
+//         },
+//       }
+//     );
+//     const aiResponseText = res.data.candidates?.[0]?.content?.parts?.[0]?.text;
+//     let cleanResponse = aiResponseText;
+//     cleanResponse = cleanResponse.replace(/```json|```/g, '');
+//     cleanResponse = cleanResponse.trim();
+
+//     const startIndex = cleanResponse.indexOf('[');
+//         const endIndex = cleanResponse.lastIndexOf(']') + 1;
+
+//         if (startIndex === -1 || endIndex === 0) {
+//           throw new Error('Could not find valid JSON array in the response');
+//         }
         
-        cleanResponse = cleanResponse.substring(startIndex, endIndex);
-        const parsedProducts = JSON.parse(cleanResponse);
+//         cleanResponse = cleanResponse.substring(startIndex, endIndex);
+//         const parsedProducts = JSON.parse(cleanResponse);
 
-        // const matchedProduct = PRODUCTS.find((p,i) => 
-        //     p.name.toLowerCase() === parsedProducts[i].name.toLowerCase() || 
-        //     p.id === parsedProducts[i].id
-        //   );
+//         // const matchedProduct = PRODUCTS.find((p,i) => 
+//         //     p.name.toLowerCase() === parsedProducts[i].name.toLowerCase() || 
+//         //     p.id === parsedProducts[i].id
+//         //   );
           
-          console.log('current product',PRODUCTS)
-          console.log('sugested',parsedProducts)
+//           console.log('current product',PRODUCTS)
+//           console.log('sugested',parsedProducts)
           
-        //   return {
-        //     ...parsedProducts,
-        //     image: parsedProducts.image || matchedProduct?.image || '/default-product-image.jpg',
-        //   };
+//         //   return {
+//         //     ...parsedProducts,
+//         //     image: parsedProducts.image || matchedProduct?.image || '/default-product-image.jpg',
+//         //   };
 
 
     
 
-    // return res.data.candidates?.[0]?.content?.parts?.[0]?.text || 'No suggestions found.';
-  } catch (error) {
-    console.error('Gemini API error:', error);
-    return 'There was an error fetching recommendations.';
-  }
-  finally {
-        setLoading(false);
-      }
-}
+//     // return res.data.candidates?.[0]?.content?.parts?.[0]?.text || 'No suggestions found.';
+//   } catch (error) {
+//     console.error('Gemini API error:', error);
+//     return 'There was an error fetching recommendations.';
+//   }
+//   finally {
+//         setLoading(false);
+//       }
+// }
 
-useEffect(()=>{
-    getSuggestions()
-},[])
+// useEffect(()=>{
+//     getSuggestions()
+// },[])
+
+
+
+const [productsData,setProductsData] = useState([])
+
+
+    useEffect(() => {
+    (async () => {
+        setLoading(true)
+        try {
+        const res = await fetchData('products');
+        // console.log(res);
+        setProductsData(res);
+        } catch (err) {
+        console.error('Error fetching data:', err);
+        }
+        finally{
+            setLoading(false)
+        }
+    })();
+    }, []);
 
   return (
     <SectionContainer>
@@ -134,7 +157,7 @@ useEffect(()=>{
             <Row className='py-4'>
 
 
-{loading ? (
+          {loading ? (
             <Col className='text-center py-5'>
               <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
@@ -148,11 +171,11 @@ useEffect(()=>{
               </div>
             </Col>
           ) : (
-            PRODUCTS.map((product, index) => (
+            productsData?.map((product, index) => (
               <Col lg={4} md={6} className="mb-4" key={index}>
                 <div className="card border-0 h-100">
                   <img 
-                    src={product.image} 
+                    src={productImage} 
                     className="card-img-top" 
                     alt={product.name}
                     onError={(e) => {e.target.src = '/default-product-image.jpg'}}
@@ -163,10 +186,12 @@ useEffect(()=>{
                       <p className="card-text">{product.description}</p>
                       {product.price && <p className="card-text fw-bold">${product.price}</p>}
                       <p className="card-text small text-muted">
-                        <strong>Why it's for you:</strong> {product.reason}
+                        {product.description}
                       </p>
                     </div>
-                    <Link to={`/product/${product.id}`} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
+                    {/* addToCart */}
+
+                    <Link onClick={()=>addToCart(product._id,1)} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
                       Add to Bag
                     </Link>
                   </div>
