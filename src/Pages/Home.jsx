@@ -8,6 +8,7 @@ import CuratedKits from '../Components/home/CuratedKits'
 import WithFullWidth from '../Components/home/WithFullWidth'
 import RecomandedProducts from '../Components/home/RecomandedProducts'
 import { AuthContext } from '../MainLayout/AuthContext'
+import OutSideProduct from '../Components/home/OutSideProduct'
 
 function index() {
   const { isLoggedIn } = useContext(AuthContext)
@@ -21,6 +22,9 @@ function index() {
           isLoggedIn && <RecomandedProducts/>
         }
         <PopularProducts/>
+        {
+          isLoggedIn && <OutSideProduct/>
+        }
         <WithFullWidth />
         <CuratedKits />
         <TipsRoutines />

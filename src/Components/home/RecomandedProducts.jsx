@@ -1,11 +1,10 @@
-import React, { useEffect,useState,use } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import TitleStyled from '../reUsable/TitleStyled'
 import { Link } from 'react-router-dom'
 import productImage from '../../assets/imgs/products/product.png'
 import SectionContainer from '../reUsable/SectionContainer'
 
-import { PRODUCTS } from '../../../utilty/data/serverData'
 import { fetchData } from '../../../utilty/data/api';
 
 
@@ -34,7 +33,11 @@ function RecomandedProducts() {
     }, []);
 
 
+    
+
+
   return (
+    <>
     <SectionContainer>
         <Container>
             <Row className='justify-content-between'>
@@ -84,7 +87,7 @@ function RecomandedProducts() {
             ))
           )}
           
-          {!loading && !error && PRODUCTS.length === 0 && (
+          {!loading && !error && recomandedsData.length === 0 && (
             <Col className='text-center py-5'>
               <p>No product recommendations available at this time.</p>
             </Col>
@@ -94,6 +97,8 @@ function RecomandedProducts() {
             </Row>
         </Container>
     </SectionContainer>
+
+    </>
   )
 }
 
