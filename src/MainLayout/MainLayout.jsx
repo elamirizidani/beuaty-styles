@@ -3,11 +3,14 @@ import { AuthProvider } from './AuthContext';
 import Footer from "../Components/footer/Footer";
 import Header from "../Components/header/Header";
 
-const MainLayout = ({children}) => {
+import { Outlet } from "react-router-dom"; 
+
+
+const MainLayout = () => {
     return (
         <AuthProvider>
           <Header/>
-            <div>{children}</div>
+            <div> <Outlet/> </div>
           <Footer/>
         </AuthProvider>
     );

@@ -87,7 +87,7 @@ function OutSideProduct() {
                         state={{ product }} 
                         style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
 
-                      View Profuct
+                      View Product
                     </Link>
                   </div>
                 </div>

@@ -30,7 +30,6 @@ function Login() {
                 login();
                 navigate('/'); 
             }
-
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed. Please try again.');
         } finally {

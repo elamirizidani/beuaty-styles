@@ -51,3 +51,53 @@ export function logout() {
   localStorage.removeItem('authToken');
   // optionally redirect user to login page
 }
+
+
+
+export const updateData = async (endpoint, data) => {
+  const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) throw new Error('Network response was not ok');
+  return await response.json();
+};
+
+export const deleteData = async (endpoint) => {
+  const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+  if (!response.ok) throw new Error('Network response was not ok');
+  return await response.json();
+};
+
+
+// export const fetchData = async (endpoint) => {
+//   const response = await fetch(`${API_BASE}/${endpoint}`, {
+//     headers: {
+//       'Authorization': `Bearer ${localStorage.getItem('token')}`
+//     }
+//   });
+//   if (!response.ok) throw new Error('Network response was not ok');
+//   return await response.json();
+// };
+
+// export const insertData = async (endpoint, data) => {
+//   const response = await fetch(`${API_BASE}/${endpoint}`, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'Authorization': `Bearer ${localStorage.getItem('token')}`
+//     },
+//     body: JSON.stringify(data)
+//   });
+//   if (!response.ok) throw new Error('Network response was not ok');
+//   return await response.json();
+// };

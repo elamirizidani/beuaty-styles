@@ -30,7 +30,7 @@ function Services() {
                                     })
                                 }
                                 </ul>
-                                <Link to='/' className='btn order_now curated-btn'> Book Now</Link>
+                                <Link to='/bookingForm' className='btn order_now curated-btn'> Book Now</Link>
                             </div>
                         </LeftRightItems>
                     )
