@@ -3,6 +3,8 @@ import {Button,Container,Form,Nav,Navbar,NavDropdown} from 'react-bootstrap';
 import './header.css'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../MainLayout/AuthContext';
+import CartModal from './CartModal';
+import UserPref from './UserPref';
 export default function Header() {
   const { isLoggedIn,logout,cartData } = useContext(AuthContext)
   return (
@@ -25,15 +27,20 @@ export default function Header() {
             </Nav.Link>
           </Nav>
           <div className="d-flex align-items-center gap-3">
-            <Nav.Link href="#">
+            {/* <Nav.Link href="#">
               <div className='headerIcon'><i class="bi bi-search"></i></div>
-            </Nav.Link>
-            <Nav.Link href="#">
+            </Nav.Link> */}
+            {/* <Nav.Link href="#">
               <div className='headerIcon'>
                 <i class="bi bi-bag"></i>
                 <em className='roundpoint'>{cartData?.length}</em>
               </div>
-            </Nav.Link>
+            </Nav.Link> */}
+            <CartModal />
+            {
+              isLoggedIn &&
+            <UserPref/>
+}
             {
               isLoggedIn ?
               <>

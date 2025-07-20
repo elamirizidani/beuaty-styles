@@ -7,7 +7,7 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    subject: '',
+    about: '',
     message: ''
   });
   const [submitStatus, setSubmitStatus] = useState({
@@ -23,18 +23,6 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log('Form submitted:', formData);
-  //   alert('Message sent! We will respond within 24 hours.');
-  //   setFormData({
-  //     fullName: '',
-  //     email: '',
-  //     subject: '',
-  //     message: ''
-  //   });
-  // };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,9 +32,9 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     try {
       
       const response = await insertData('/helps/create', formData);
-      
+      // console.log(response)
       setSubmitStatus({
-        message: response.data.message || 'Message sent successfully!',
+        message: response.message || 'Message sent successfully!',
         isError: false
       });
       
@@ -189,7 +177,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         </div>
 
         <div className="mb-3">
-          <label htmlFor="subject" className="form-label" style={{
+          <label htmlFor="about" className="form-label" style={{
             fontWeight: 'bold',
             display: 'block',
             marginBottom: '0.5rem'
@@ -199,9 +187,9 @@ const [isSubmitting, setIsSubmitting] = useState(false);
           <input
             type="text"
             className="form-control"
-            id="subject"
-            name="subject"
-            value={formData.subject}
+            id="about"
+            name="about"
+            value={formData.about}
             onChange={handleChange}
             required
             style={{

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-let API_BASE_URL = "https://beuaty-backend.onrender.com/api/";
-// let API_BASE_URL = 'http://localhost:5001/api/';
+// let API_BASE_URL = "https://beuaty-backend.onrender.com/api/";
+let API_BASE_URL = 'http://localhost:5001/api/';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -52,9 +52,13 @@ export function logout() {
   // optionally redirect user to login page
 }
 
+export const updateData = async (endpoint,data)=>{
+  const res = await api.put(endpoint,data)
+  return res.data
+}
 
 
-export const updateData = async (endpoint, data) => {
+export const updateDatas = async (endpoint, data) => {
   const response = await fetch(`${API_BASE_URL}/${endpoint}`, {
     method: 'PUT',
     headers: {

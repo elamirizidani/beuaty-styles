@@ -11,7 +11,7 @@ export default function CuratedKits(){
                  <Row className='justify-content-between'>
 
                     <Col lg={6}><TitleStyled title={'Curated Kits for Everyday Care'} subtext={'Simplify your routine with handpicked product combos'}/></Col>
-                    <Col lg={6} className='d-flex justify-content-end'><Link to='/' className='btn order_now'>Go Shop</Link></Col>
+                    <Col lg={6} className='d-flex justify-content-end'><Link to='/shop' className='btn order_now'>Go Shop</Link></Col>
 
                 </Row>
                 <Row className='container curated-column-wrapper'>
@@ -20,7 +20,7 @@ export default function CuratedKits(){
                      <h2 className="title-text text-black section-title">
                         Curly Hair <br/>Essentials Kit
                      </h2>
-                     <Link to='/' className='btn order_now curated-btn'> Shop Now</Link>
+                     <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
                      <img src={curatedImg1} alt=''className='curated-img'/>
 
                    </Col>
@@ -28,7 +28,7 @@ export default function CuratedKits(){
                      <h2 className="title-text text-black section-title">
                         Beard Grooming Set
                      </h2>
-                     <Link to='/' className='btn order_now curated-btn'> Shop Now</Link>
+                     <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
                      <img src={curatedImg2} alt=''className='curated-img'/>
                      
                    </Col>
@@ -39,7 +39,7 @@ export default function CuratedKits(){
                      <h2 className="title-text text-black section-title">
                         Hydration Starter Pack
                      </h2>
-                     <Link to='/' className='btn order_now curated-btn'> Shop Now</Link>
+                     <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
                    
 
                    </Col>

@@ -1,11 +1,11 @@
 import React, { useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { login as apiLogin,register } from '../../utilty/data/api';
+import { register } from '../../utilty/data/api';
 import { AuthContext } from '../MainLayout/AuthContext';
 import loginImage from '../assets/imgs/auth/login.webp'
 import SectionContainer from '../Components/reUsable/SectionContainer'
 import { Tab, Tabs } from 'react-bootstrap';
-
+import { useAuthStore } from '../store/authStore';
 
 function Login() {
     const navigate = useNavigate();
@@ -18,25 +18,49 @@ function Login() {
     const [loading, setLoading] = useState(false);
     // const [showLogin,setShowLogin] = useState(true)
 
+    const { adminLogin } = useAuthStore();
+
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-        setLoading(true);
-        try {
-            const data = await apiLogin(email, password);
-            // console.log(data.token)
-            if (data.token) {
-                alert('Login successful!');
-                login();
-                navigate('/'); 
-            }
-        } catch (err) {
-            setError(err.response?.data?.message || 'Login failed. Please try again.');
-        } finally {
-            setLoading(false);
-            // setError('Login failed. Please try again.');
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+        const userRole = await adminLogin({ email: email, password: password });
+        console.log(userRole)
+        if (userRole === 'admin') {
+            navigate('/admin');
+        } else {
+            navigate('/');
         }
-    };
+        
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     setError('');
+    //     setLoading(true);
+    //     try {
+    //         const data = await apiLogin(email, password);
+    //         // console.log(data.token)
+    //         if (data.token) {
+    //             alert('Login successful!');
+    //             login();
+    //             navigate('/'); 
+    //         }
+    //     } catch (err) {
+    //         setError(err.response?.data?.message || 'Login failed. Please try again.');
+    //     } finally {
+    //         setLoading(false);
+    //         // setError('Login failed. Please try again.');
+    //     }
+    // };
 
 
     const handleRegistor = async(e)=>{
