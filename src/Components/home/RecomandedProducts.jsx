@@ -6,6 +6,7 @@ import productImage from '../../assets/imgs/products/product.png'
 import SectionContainer from '../reUsable/SectionContainer'
 
 import { fetchData } from '../../../utilty/data/api';
+import { useAuthStore } from '../../store/authStore'
 
 
 
@@ -14,7 +15,7 @@ function RecomandedProducts() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [recomandedsData,setRecomandedData] = useState([])
-
+ const { addToCart } = useAuthStore();
 
     useEffect(() => {
     (async () => {
@@ -78,9 +79,12 @@ function RecomandedProducts() {
                         <strong>Why it's for you:</strong> {product.description}
                       </p>
                     </div>
-                    <Link to={`/product/${product.id}`} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
+                    {/* <Link to={`/product/${product.id}`} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
                       Add to Bag
-                    </Link>
+                    </Link> */}
+                    <Link onClick={()=>addToCart(product._id,1)} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
+                                          Add to Bag
+                                        </Link>
                   </div>
                 </div>
               </Col>

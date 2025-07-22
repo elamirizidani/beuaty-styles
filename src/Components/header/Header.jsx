@@ -1,12 +1,17 @@
-import React, { useContext } from 'react'
-import {Button,Container,Form,Nav,Navbar,NavDropdown} from 'react-bootstrap';
+import React,{useState} from 'react'
+import {Button,Container,Form,Nav,Navbar,NavDropdown,Toast,ToastContainer} from 'react-bootstrap';
 import './header.css'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../MainLayout/AuthContext';
 import CartModal from './CartModal';
 import UserPref from './UserPref';
+import { useAuthStore } from '../../store/authStore';
 export default function Header() {
-  const { isLoggedIn,logout,cartData } = useContext(AuthContext)
+
+  const { isLoggedIn,adminLogout,user } = useAuthStore();
+const [show, setShow] = useState(true);
+
+console.log('logged user',user)
   return (
     <header>
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -44,7 +49,7 @@ export default function Header() {
             {
               isLoggedIn ?
               <>
-                <button onClick={()=>logout()} className="btn order_now">
+                <button onClick={()=>adminLogout()} className="btn order_now">
                     Sign Out
                 </button>
               </>
@@ -55,6 +60,22 @@ export default function Header() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+{
+  (isLoggedIn && !user?.preferences) &&
+  <ToastContainer position="end" className="p-3" style={{ zIndex: 1,right:0 }}>
+        <Toast bg='danger' onClose={() => setShow(false)} show={show} delay={30000} autohide>
+          <Toast.Header>
+            <strong className="me-auto">Update your preferences.</strong>
+            <small className="text-muted">just now</small>
+          </Toast.Header>
+          <Toast.Body className={'text-white'}>Please complete your profile to set your preferences and personalize your experience.</Toast.Body>
+        </Toast>
+      </ToastContainer>
+}
+      
+
+
     </header>
   )
 }

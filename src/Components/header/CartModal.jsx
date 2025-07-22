@@ -7,7 +7,7 @@ const CartModal = () => {
   const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
-const { cartData } = useAuthStore();
+const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
 
 
 
@@ -33,8 +33,14 @@ const { cartData } = useAuthStore();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const updateQuantity = (id, newQuantity) => {
+  const updateQuantity = async (id, newQuantity) => {
+
+    // console.log(id)
+    // console.log(newQuantity)
+
     if (newQuantity < 1) return;
+
+    await addToCart(id, newQuantity) 
     
     setCartItems(prevItems => 
       prevItems.map(item => 
@@ -43,17 +49,20 @@ const { cartData } = useAuthStore();
     );
   };
 
-  const removeItem = (id) => {
+  const removeItem = async (id) => {
+    // console.log(id)
+    await removeToCart(id) 
     setCartItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
   // Recalculate total whenever cartItems change
   useEffect(() => {
+    console.log(cartItems)
     const newTotal = cartItems.reduce(
-      (sum, item) => sum + (item?.productId.price * item.quantity), 0
+      (sum, item) => sum + (item?.productId?.price * item?.quantity), 0
     );
     setTotal(newTotal);
-  }, [cartItems]);
+  }, [cartItems,isLoggedIn]);
 
   return (
     <>
@@ -70,7 +79,7 @@ const { cartData } = useAuthStore();
         style={{ cursor: 'pointer' }}
       >
         <FaShoppingCart size={20} className="text-dark" />
-        {cartItems.length > 0 && (
+        {(cartItems.length > 0 && isLoggedIn)&& (
           <Badge 
             pill 
             bg="danger" 
@@ -110,7 +119,9 @@ const { cartData } = useAuthStore();
                     </tr>
                   </thead>
                   <tbody>
-                    {cartItems.map((item,i) => (
+                    {cartItems.map((item) => {
+                      if(item?.productId)
+                      return(
                       <tr key={item?._id}>
                         <td>
                           <div className="d-flex align-items-center">
@@ -129,7 +140,7 @@ const { cartData } = useAuthStore();
                             <Button 
                               variant="outline-secondary" 
                               size="sm"
-                              onClick={() => updateQuantity(item?._id, item?.quantity - 1)}
+                              onClick={() => updateQuantity(item?.productId?._id, Number(item?.quantity) - 1)}
                             >
                               -
                             </Button>
@@ -137,7 +148,7 @@ const { cartData } = useAuthStore();
                             <Button 
                               variant="outline-secondary" 
                               size="sm"
-                              onClick={() => updateQuantity(item?._id, item?.quantity + 1)}
+                              onClick={() => updateQuantity(item?.productId?._id, Number(item?.quantity) + 1)}
                             >
                               +
                             </Button>
@@ -148,13 +159,14 @@ const { cartData } = useAuthStore();
                           <Button 
                             variant="link" 
                             className="text-danger"
-                            onClick={() => removeItem(item?._id)}
+                            onClick={() => removeItem(item?.productId?._id)}
                           >
                             Remove
                           </Button>
                         </td>
                       </tr>
-                    ))}
+                    )}
+                    )}
                   </tbody>
                 </table>
               </div>

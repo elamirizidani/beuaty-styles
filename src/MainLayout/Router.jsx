@@ -20,7 +20,8 @@ import AdminUsers from "../Pages/admin/Users";
 import AdminOrders from "../Pages/admin/Orders";
 import AdminAnalytics from "../Pages/admin/Analytics";
 import AdminBookings from "../Pages/admin/Bookings";
-import AdminLogin from "../Pages/admin/Login";
+import AdminPosts from "../Pages/admin/Posts";
+// import AdminLogin from "../Pages/admin/Login";
 import { useEffect } from "react";
 import { useAuthStore } from '../store/authStore';
 export default function AppRouter() {
@@ -55,6 +56,7 @@ export default function AppRouter() {
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/bookings" element={<AdminBookings />} />
+          <Route path="/admin/posts" element={<AdminPosts/>}/>
         </Route>
       </Route>
     </Routes>

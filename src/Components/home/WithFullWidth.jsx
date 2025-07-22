@@ -20,7 +20,7 @@ export default function WithFullWidth (){
                           Curly Hair <br/>Essentials Kit
                   </h2>
                   <span className='text-center'>Tell us about your hair type, skin needs, and grooming goals and we’ll show you exactly what fits you best.</span>
-                  <Link to='/' className='btn order_now curated-btn'> Shop Now</Link>
+                  <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
                </div>
                 
             </Col>
@@ -41,7 +41,7 @@ export default function WithFullWidth (){
                           Curly Hair <br/>Essentials Kit
                   </h2>
                   <span className='text-center'>Tell us about your hair type, skin needs, and grooming goals and we’ll show you exactly what fits you best.</span>
-                  <Link to='/' className='btn order_now curated-btn'> Shop Now</Link>
+                  <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
                </div>
                 
             </Col>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-let API_BASE_URL = "https://beuaty-backend.onrender.com/api/";
-// let API_BASE_URL = 'http://localhost:5001/api/';
+// let API_BASE_URL = "https://beuaty-backend.onrender.com/api/";
+let API_BASE_URL = 'http://localhost:5001/api/';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -12,7 +12,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -22,7 +22,7 @@ api.interceptors.request.use(config => {
 export async function login(email, password) {
   const res = await api.post('auth/login', { email:email, password:password });
   if (res.status === 200 && res.data.token) {
-    localStorage.setItem('authToken', res.data.token);
+    localStorage.setItem('token', res.data.token);
   }
   return res.data;
 }
@@ -48,7 +48,7 @@ export async function insertData(endpoint, payload) {
 
 // Logout helper to clear token
 export function logout() {
-  localStorage.removeItem('authToken');
+  localStorage.removeItem('token');
   // optionally redirect user to login page
 }
 

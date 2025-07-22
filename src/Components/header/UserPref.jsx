@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { Modal, Button, Form, Row, Col,Badge } from 'react-bootstrap';
 import { FaUserEdit } from 'react-icons/fa';
 import { updateData } from '../../../utilty/data/api';
+import { useAuthStore } from '../../store/authStore';
 
 const UserPref = ({ userId }) => {
+  const { user } = useAuthStore();
   const [preferences, setPreferences] = useState({
     hairType: '',
     skinType: '',
@@ -89,6 +90,15 @@ const UserPref = ({ userId }) => {
         style={{ cursor: 'pointer' }}
       >
         <FaUserEdit size={20} className="text-dark" />
+        {!user?.preferences && (
+          <Badge 
+            pill 
+            bg="danger" 
+            className="position-absolute top-0 start-100 translate-middle"
+          >
+            .
+          </Badge>
+        )}
       </div>
       
     <Modal show={show} onHide={handleClose} size="lg" centered backdrop="static">

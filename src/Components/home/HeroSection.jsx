@@ -12,7 +12,7 @@ function HeroSection() {
                     <h1 className='text-white'>
                         Your Personalized Hair & Beauty Store
                     </h1>
-                    <Link to='/' className='btn order_now'>Shop Now</Link>
+                    <Link to='/shop' className='btn order_now'>Shop Now</Link>
                 </div>
                 </Col>
             </Row>

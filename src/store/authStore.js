@@ -1,6 +1,6 @@
 // src/store/authStore.js
 import { create } from 'zustand';
-import { fetchData, insertData,login as apiLogin } from '../../utilty/data/api';
+import { fetchData, insertData,login as apiLogin, register } from '../../utilty/data/api';
 
 
 export const useAuthStore = create((set, get) => ({
@@ -8,30 +8,28 @@ export const useAuthStore = create((set, get) => ({
   isLoggedIn: false,
   cartData: null,
   userRole:null,
-  isAdmin:false,
   loading:true,
 
   checkAuth: async () => {
-  
-  try {
-    // Optionally set loading state here
-    const response = await fetchData('user/profile'); // or whatever endpoint returns user info
-    if (response.user) {
-      set({
-        user: response.user,
-        isLoggedIn: true,
-      });
-      get().getCartData();
-    } else {
+    try {
+      const response = await fetchData('user/profile');
+      if (response.user) {
+        set({
+          user: response.user,
+          isLoggedIn: true,
+          userRole:response.user.role
+        });
+        get().getCartData();
+      } else {
+        localStorage.removeItem('token');
+        set({ isLoggedIn: false, user: null,userRole:null, });
+      }
+    } catch (error) {
+      console.error('Failed to auto-login:', error);
       localStorage.removeItem('token');
       set({ isLoggedIn: false, user: null });
     }
-  } catch (error) {
-    console.error('Failed to auto-login:', error);
-    localStorage.removeItem('token');
-    set({ isLoggedIn: false, user: null });
-  }
-},
+  },
   
   // Actions
   login: () => set({ isLoggedIn: true }),
@@ -40,26 +38,71 @@ export const useAuthStore = create((set, get) => ({
     const response = await apiLogin(userData.email, userData.password);
     if (response.token) {
       localStorage.setItem('token', response.token);
+      // set({
+      //   isLoggedIn: true,
+      //   user: response.user,
+      //   userRole:response.user.role
+      // });
+      await get().checkAuth();
+      get().getCartData();
+      return {
+        role:response.user.role,
+        status:true
+      };
+    } else {
+      set({ isLoggedIn: false, user: null,userRole:null });
+      return {
+        role:null,
+        status:false
+      };
+    }
+  } catch (error) {
+    // console.log(error);
+    set({ isLoggedIn: false, user: null });
+    return {
+        role:null,
+        status:false
+      };
+  }
+},
+userRegistration: async (userData) =>{
+  try {
+    const response = await register(userData)
+    console.log('returned data', response)
+    if (response.token) {
+      localStorage.setItem('token', response.token);
       set({
         isLoggedIn: true,
-        user: response.user
+        user: response.user,
+        userRole:response?.user?.role
       });
       get().getCartData();
-      return response.user.role;
-    } else {
-      set({ isLoggedIn: false, user: null });
-      return null;
+      return {
+        role:response?.user?.role,
+        status:true
+      };
     }
+    else {
+      set({ isLoggedIn: false, user: null,userRole:null });
+      return {
+        role:null,
+        status:false
+      };
+    }
+    
   } catch (error) {
     console.log(error);
     set({ isLoggedIn: false, user: null });
-    return null;
+    return {
+        role:null,
+        status:false
+      };
   }
-},
+  },
 
   adminLogout: () => {
     localStorage.removeItem('token');
-    set({ isLoggedIn: false, user: null });
+    set({ isLoggedIn: false, user: null,userRole:null });
   },
 
   logout: () => {
@@ -73,10 +116,6 @@ export const useAuthStore = create((set, get) => ({
     try {
 
       const response = await fetchData('user/cart');
-      // console.log('====================================');
-      // console.log(response);
-      // console.log('====================================');
-
       set({ cartData: response.cart });
     } catch (error) {
       console.log(error);
@@ -88,6 +127,7 @@ export const useAuthStore = create((set, get) => ({
       productId: productId,
       quantity: quantity
     };
+    // console.log(data)
     try {
       const response = await insertData('user/cart/add', data);
       if (response.cart) {
@@ -97,6 +137,25 @@ export const useAuthStore = create((set, get) => ({
       console.log(error);
     }
   },
+
+  removeToCart: async(productId)=>{
+    const data = {
+      productId: productId
+    };
+    try {
+      const response = await insertData('user/cart/remove', data);
+      if (response.cart) {
+        get().getCartData();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  isAdmin: () => {
+  const user = get().user;
+  console.log(user?.role === 'admin');
+  return user?.role === 'admin';
+},
   
   loggedAdmin: () => {
     return get().user?.role === 'admin';
@@ -104,16 +163,12 @@ export const useAuthStore = create((set, get) => ({
 
   initialize: async () => {
     const token = localStorage.getItem('token');
-    console.log(token)
+    // console.log(token)
     if (!token) {
-      set({ isLoggedIn: false, user: null, isAdmin: false,loading: false });
-      
+      set({ isLoggedIn: false, user: null,loading: false });
       return;
     }
     await get().checkAuth();
-    const role = await get().loggedAdmin();
-    set({ isAdmin: role,loading: false });
-
-    get().getCartData();
+    set({ loading: false });
 }
 }));

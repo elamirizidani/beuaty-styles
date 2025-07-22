@@ -6,12 +6,12 @@ import productImage from '../../assets/imgs/products/product.png'
 import SectionContainer from '../reUsable/SectionContainer'
 import { fetchData } from '../../../utilty/data/api';
 import { AuthContext } from '../../MainLayout/AuthContext'
+import { useAuthStore } from '../../store/authStore'
 
 function PopularProducts() {
-  const {addToCart} = useContext(AuthContext)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+    const { addToCart } = useAuthStore();
 
 const [productsData,setProductsData] = useState([])
 
