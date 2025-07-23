@@ -107,7 +107,7 @@ userRegistration: async (userData) =>{
 
   logout: () => {
     localStorage.removeItem('token');
-    set({ isLoggedIn: false, user: null });
+    set({ isLoggedIn: false, user: null,cartData: null, });
   },
   
   setUser: (user) => set({ user }),
