@@ -9,6 +9,12 @@ export const useAuthStore = create((set, get) => ({
   cartData: null,
   userRole:null,
   loading:true,
+  showProfileEdit: false,
+
+  changeShowProfile: () => {
+    const currentState = get().showProfileEdit; // Get the current boolean value
+    set({ showProfileEdit: !currentState }); // Toggle the boolean
+  },
 
   checkAuth: async () => {
     try {

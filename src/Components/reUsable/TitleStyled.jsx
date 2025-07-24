@@ -5,7 +5,7 @@ function TitleStyled({title,align='start', subtext}) {
     <div className={`title-container d-flex flex-column align-items-${align}`}>
       <h3 className='title-text text-black section-title'>{title}</h3>
       {subtext && <p>{subtext}</p>}
-      <div className='title-underline'/>
+      {/* <div className='title-underline'/> */}
     </div>
   )
 }

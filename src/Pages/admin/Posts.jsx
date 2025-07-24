@@ -20,7 +20,7 @@ export default function Posts() {
   const fetchNews = async () => {
     try {
       const res = await fetchData('/posts');
-      setNews(res.data);
+      setNews(res);
     } catch (error) {
       console.error('Error fetching news:', error);
     }
@@ -32,7 +32,9 @@ export default function Posts() {
     form.append('title', formData.title);
     form.append('content', formData.content);
     form.append('published', formData.published);
-    if (formData.image) form.append('image', formData.image);
+    form.append('image', formData.image);
+
+    console.log(JSON.stringify(formData))
 
     try {
       await insertData('/posts', form, {
@@ -74,7 +76,7 @@ export default function Posts() {
         <Modal.Header closeButton>
           <Modal.Title>Add News</Modal.Title>
         </Modal.Header>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} enctype="multipart/form-data">
           <Modal.Body>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
@@ -99,10 +101,24 @@ export default function Posts() {
 
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 type="file"
                 onChange={(e) => setFormData({...formData, image: e.target.files[0]})}
+              /> */}
+
+              <Form.Control
+                type="file"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  console.log("Selected file:", file); // Debug
+                  setFormData(prev => ({
+                    ...prev,
+                    image: file // Correctly updates the File object
+                  }));
+                }}
+                required // Optional: if the image is mandatory
               />
+
             </Form.Group>
 
             <Form.Check

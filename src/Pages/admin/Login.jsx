@@ -22,7 +22,7 @@ const AdminLogin = () => {
 
     try {
         const userRole = await adminLogin({ email: email, password: password });
-        console.log(userRole)
+        // console.log(userRole)
         if (userRole === 'admin') {
             navigate('/admin');
         } else {

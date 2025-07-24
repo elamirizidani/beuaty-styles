@@ -57,7 +57,7 @@ const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
 
   // Recalculate total whenever cartItems change
   useEffect(() => {
-    console.log(cartItems)
+    // console.log(cartItems)
     const newTotal = cartItems.reduce(
       (sum, item) => sum + (item?.productId?.price * item?.quantity), 0
     );

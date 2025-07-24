@@ -5,7 +5,7 @@ import { updateData } from '../../../utilty/data/api';
 import { useAuthStore } from '../../store/authStore';
 
 const UserPref = ({ userId }) => {
-  const { user } = useAuthStore();
+  const { user,showProfileEdit,changeShowProfile } = useAuthStore();
   const [preferences, setPreferences] = useState({
     hairType: '',
     skinType: '',
@@ -33,8 +33,8 @@ const UserPref = ({ userId }) => {
     'Redness reduction', 'Pore minimization', 'Even skin tone'
   ];
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => changeShowProfile();
+  const handleShow = () => changeShowProfile();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -101,7 +101,7 @@ const UserPref = ({ userId }) => {
         )}
       </div>
       
-    <Modal show={show} onHide={handleClose} size="lg" centered backdrop="static">
+    <Modal show={showProfileEdit} onHide={handleClose} size="lg" centered backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>Tell Us About Your Preferences</Modal.Title>
       </Modal.Header>

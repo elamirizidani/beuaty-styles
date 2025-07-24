@@ -12,6 +12,8 @@ import Shop from "../Pages/Shop";
 import Login from "../Pages/Login";
 import AIproducts from "../Pages/products/AIproducts";
 import OurProduct from "../Pages/products/OurProduct";
+import SingleProduct from "../Pages/products/SingleProduct";
+
 
 // Admin pages
 import AdminDashboard from "../Pages/admin/Dashboard";
@@ -41,9 +43,10 @@ export default function AppRouter() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/AIproducts" element={<AIproducts />} />
         <Route path="/OurProduct" element={<OurProduct />} />
+        <Route path="/Product" element={<SingleProduct />} />
+        
       </Route>
 
       {/* Admin routes */}

@@ -64,12 +64,17 @@ function RecomandedProducts() {
             recomandedsData?.map((product, index) => (
               <Col lg={4} md={6} className="mb-4" key={index}>
                 <div className="card border-0 h-100">
+                  <Link
+                                                to={`/Product`}
+                                                state={{ product }}
+                                            >
                   <img 
                     src={productImage} 
                     className="card-img-top" 
                     alt={product.name}
                     onError={(e) => {e.target.src = '/default-product-image.jpg'}}
                   />
+                  </Link>
                   <div className="card-body p-0 d-flex flex-column">
                     <div className='p-3 flex-grow-1'>
                       <h5 className="card-title">{product.name}</h5>

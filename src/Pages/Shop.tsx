@@ -117,7 +117,7 @@ function Shop() {
                                     <Col lg={4} md={6} className="mb-4" key={index}>
                                         <div className="card border-0 h-100">
                                             <Link
-                                                to={`/OurProduct`}
+                                                to={`/Product`}
                                                 state={{ product }}
                                             >
                                                 <img

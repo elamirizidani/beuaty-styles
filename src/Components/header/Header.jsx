@@ -11,7 +11,7 @@ export default function Header() {
   const { isLoggedIn,adminLogout,user } = useAuthStore();
 const [show, setShow] = useState(true);
 
-console.log('logged user',user)
+// console.log('logged user',user)
   return (
     <header>
     <Navbar expand="lg" className="bg-body-tertiary">

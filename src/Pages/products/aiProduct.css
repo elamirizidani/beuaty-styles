@@ -38,7 +38,7 @@ body {
 .product-image {
   background: linear-gradient(145deg, #ffffff, #f0f8f0);
   border-radius: 20px;
-  padding: 2rem;
+  /* padding: 2rem; */
   box-shadow: 0 10px 30px rgba(44, 95, 45, 0.1);
   position: relative;
   overflow: hidden;
