@@ -8,10 +8,7 @@ const CartModal = () => {
   const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [total, setTotal] = useState(0);
-const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
-
-
-
+  const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
 
 
 // console.log(cartData)
@@ -19,10 +16,12 @@ const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
   useEffect(() => {
     const fetchCartData = () => {
       // Replace this with actual API call or localStorage retrieval
-      setCartItems(cartData || []);
       
+      const cartItems = cartData?.filter(cartItems => cartItems?.productId)
+      setCartItems(cartItems || []);
       // Calculate total
-      const calculatedTotal = cartData?.reduce(
+      // console.log(JSON.stringify(cartItems))
+      const calculatedTotal = cartItems?.reduce(
         (sum, item) => sum + (item?.productId?.price * item?.quantity), 0
       );
       setTotal(calculatedTotal);

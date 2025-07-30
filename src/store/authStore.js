@@ -127,7 +127,20 @@ userRegistration: async (userData) =>{
       console.log(error);
     }
   },
-  
+  clearCart: async () => {
+  try {
+    const response = await insertData('/users/cart/empty', {item:1});
+    set({ cartData: [] });
+      // Optionally refresh cart data from server
+      // get().getCartData();
+
+    return response;
+  } catch (error) {
+    console.error('Error clearing cart:', error);
+    throw error;
+  }
+},
+
   addToCart: async (productId, quantity) => {
     const data = {
       productId: productId,
