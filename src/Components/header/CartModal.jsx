@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Badge } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useAuthStore } from '../../store/authStore';
+import { Link } from 'react-router-dom';
 
 const CartModal = () => {
   const [show, setShow] = useState(false);
@@ -63,6 +64,7 @@ const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
     );
     setTotal(newTotal);
   }, [cartItems,isLoggedIn]);
+  
 
   return (
     <>
@@ -186,9 +188,8 @@ const { cartData,addToCart,removeToCart,isLoggedIn } = useAuthStore();
                     <span>Total:</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
-                  <Button variant="dark" className="w-100 mt-3">
-                    Proceed to Checkout
-                  </Button>
+                  <Link to='/Checkout' variant="dark" className="w-100 mt-3">
+                  Proceed to Checkout</Link>
                 </div>
               </div>
             </>

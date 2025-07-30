@@ -8,7 +8,9 @@ import category2 from '../../assets/imgs/product3.webp'
 import product3 from '../../assets/imgs/product4.webp'
 import categor3 from '../../assets/imgs/product5.webp'
 import SectionContainer from '../reUsable/SectionContainer'
-
+import { fetchData } from '../../../utilty/data/api';
+import productImage from '../../assets/imgs/products/product.png'
+import { Link } from 'react-router-dom';
 function CustomCarousel({ children, responsive = {}, loop = true, autoplay = false, autoplayTimeout = 3000 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
@@ -100,7 +102,7 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
           transition: 'transform 0.3s ease',
           transform: `translateX(-${currentSlide * (100 / itemsToShow)}%)`,
           width: `${100 * (totalSlides / itemsToShow)}%`,
-          gap: "32px"
+        //   gap: "32px"
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -133,7 +135,7 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
               width: currentSlide === index ? "25px" :'10px',
               height: '10px',
               borderRadius: currentSlide === index  ? "20px" : '50%',
-              backgroundColor: currentSlide === index ? '#FF6A00' : 'rgb(255 106 0 / 66%)',
+              backgroundColor:'#fff',
               margin: '0 5px',
               padding: 0,
               border: 'none',
@@ -147,11 +149,11 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
   );
 }
 
-function ShopByCategory() {
+function ProductSlider() {
   const responsive = {
     0: { items: 1 },
     600: { items: 2 },
-    1000: { items: 5 },
+    1000: { items: 3 },
   };
 
   const categories = [
@@ -162,44 +164,77 @@ function ShopByCategory() {
     { id: 5, name: "Styling Gels and Creams",img:categor3 },
     { id: 6, name: "Category 2",img:category },
   ];
+    const [loading, setLoading] = useState(true);
+const [recomandedsData,setRecomandedData] = useState([])
+
+  useEffect(() => {
+      (async () => {
+          setLoading(true)
+          try {
+          const res = await fetchData('recommendations/content-based');
+          // console.log(res.recommendedProducts);
+          setRecomandedData(res.recommendedProducts);
+          } catch (err) {
+          console.error('Error fetching data:', err);
+          }
+          finally{
+              setLoading(false)
+          }
+      })();
+      }, []);
 
   return (
-    <SectionContainer background={"#be8f451a"}>
-      <Container>
-        <TitleStyled title="Shop by Category" align="center" />
-        <div className='py-5'>
         <CustomCarousel
           responsive={responsive}
           loop={true}
           autoplay={true}
           autoplayTimeout={5000}
         >
-          {categories.map((category) => (
-            <div 
-              className='category-wrapper'
-              key={category.id} 
-              style={{
-                backgroundImage: `url(${category.img})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                borderRadius: '50%',
-                padding: '25px',
-                textAlign: 'center',
-                aspectRatio:1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-              }}
-            >
-              <h4 className='category-name'>{category.name}</h4>
-            </div>
+          {recomandedsData.map((product,i) => (
+            <Link to={`/Product`}
+                                                state={{ product }} key={i}>
+                <img 
+                    src={product?.productImage || productImage} 
+                    // className="card-img-top" 
+                    style={{
+                    backgroundImage: `url(${category.img})`,
+                    backgroundSize: 'cover',
+                    height:'370px',
+                    width:'250px',
+                    backgroundPosition: 'center',
+                    // borderRadius: '50%',
+                    // padding: '25px',
+                    textAlign: 'center',
+                    aspectRatio:1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+                    alt={product.name}
+                    onError={(e) => {e.target.src = productImage}}
+                />
+            </Link>
+            // <div 
+            // //   className='category-wrapper'
+            //   key={category.id} 
+            //   style={{
+            //     backgroundImage: `url(${category.img})`,
+            //     backgroundSize: 'cover',
+            //     height:'370px',
+            //     width:'250px',
+            //     backgroundPosition: 'center',
+            //     // borderRadius: '50%',
+            //     // padding: '25px',
+            //     textAlign: 'center',
+            //     aspectRatio:1,
+            //     display: 'flex',
+            //     alignItems: 'center',
+            //     justifyContent: 'center',
+            //   }}
+            // />
           ))}
         </CustomCarousel>
-        </div>
-      </Container>
-    </SectionContainer>
   );
 }
 
-export default ShopByCategory;
+export default ProductSlider;
