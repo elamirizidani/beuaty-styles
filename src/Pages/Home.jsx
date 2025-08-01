@@ -13,7 +13,7 @@ import SectionContainer from '../Components/reUsable/SectionContainer'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ProductSlider from '../Components/home/ProductSlider'
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from 'react-responsive'
 function index() {
   // const { isLoggedIn } = useContext(AuthContext)
    const { isLoggedIn,user } = useAuthStore();

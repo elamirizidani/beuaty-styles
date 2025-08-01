@@ -6,6 +6,7 @@ import { AuthContext } from '../../MainLayout/AuthContext';
 import CartModal from './CartModal';
 import UserPref from './UserPref';
 import { useAuthStore } from '../../store/authStore';
+import SideModel from './SideModel';
 export default function Header() {
 
   const { isLoggedIn,adminLogout,user } = useAuthStore();
@@ -30,21 +31,22 @@ const [show, setShow] = useState(true);
             <Nav.Link as={Link} to="/contact">
               Contact us
             </Nav.Link>
+            {
+              isLoggedIn &&
+              <Nav.Link as={Link} to="/MyAccount">
+              My Account
+            </Nav.Link>
+            }
           </Nav>
           <div className="d-flex align-items-center gap-3">
-            {/* <Nav.Link href="#">
-              <div className='headerIcon'><i class="bi bi-search"></i></div>
-            </Nav.Link> */}
-            {/* <Nav.Link href="#">
-              <div className='headerIcon'>
-                <i class="bi bi-bag"></i>
-                <em className='roundpoint'>{cartData?.length}</em>
-              </div>
-            </Nav.Link> */}
             <CartModal />
             {
               isLoggedIn &&
-            <UserPref/>
+              <>
+              <UserPref/>
+            <SideModel/>
+            </>
+            
 }
             {
               isLoggedIn ?

@@ -1,6 +1,6 @@
 .hero_section {
   position: relative;
-  min-height: 750px;
+  /* min-height: 750px; */
   background: url("../../assets/imgs/hero.webp");
   background-size: cover;
   background-repeat: no-repeat;
@@ -102,7 +102,7 @@
   padding-top: 100px;
 }
 .curated-column-wrapper {
-  gap: 32px;
+  /* gap: 32px; */
   padding: 0 0 32px 0;
 }
 .curated {
@@ -113,7 +113,7 @@
   padding-right: 40px;
   padding-bottom: 30px;
   padding-left: 40px;
-  width: 48.7%;
+  /* width: 48.7%; */
 }
 .curated-column {
   background: #e3ece7;
@@ -155,8 +155,8 @@
 }
 .tip-card {
   margin: 0;
-  padding: 0;
-  width: 31.8%;
+  /* padding: 0; */
+  /* width: 31.8%; */
 }
 .tip-card span {
   font-family: "Montserrat";

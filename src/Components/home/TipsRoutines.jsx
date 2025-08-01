@@ -13,12 +13,12 @@ export default function TipsRoutines(){
                  <Row className='justify-content-between'>
 
             
-                    <Col lg={6}><TitleStyled title={'Tips & Routines from the Experts'}/></Col>
-                    <Col lg={6} className='d-flex justify-content-end'><Link to='/' className='btn order_now'>Visit Learn Center</Link></Col>
+                    <Col md={6}><TitleStyled title={'Tips & Routines from the Experts'}/></Col>
+                    <Col md={6} className='d-flex justify-content-end'><Link to='/' className='btn order_now'>Visit Learn Center</Link></Col>
 
                 </Row>
-                <Row className='container gap-3'>
-                   <Col lg={4} className='tip-card d-flex flex-column gap-3'> 
+                <Row className='container'>
+                   <Col md={4} className='tip-card d-flex flex-column gap-3'> 
                      <img src={tip1} alt='tip image' className='tip-routes' />
                      <span className='date'>Apr 21, 2025</span>
                      <div className="tip-title">
@@ -27,7 +27,7 @@ export default function TipsRoutines(){
                         </h4>
                      </div>
                    </Col>
-                   <Col lg={4} className='tip-card d-flex flex-column gap-3'> 
+                   <Col md={4} className='tip-card d-flex flex-column gap-3'> 
                      <img src={tip2} alt='tip image' className='tip-routes' />
                      <span className='date'>Apr 21, 2025</span>
                      <div className="tip-title">
@@ -36,7 +36,7 @@ export default function TipsRoutines(){
                         </h4>
                      </div>
                    </Col>
-                   <Col lg={4} className='tip-card d-flex flex-column gap-3'> 
+                   <Col md={4} className='tip-card d-flex flex-column gap-3'> 
                      <img src={tip3} alt='tip image' className='tip-routes' />
                      <span className='date'>Apr 21, 2025</span>
                      <div className="tip-title">

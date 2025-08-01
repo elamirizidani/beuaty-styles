@@ -4,7 +4,7 @@
   --light-red: #e3000e;
   --light-grey: #f6f9fa;
   --light-grey-2: #dddddd;
-  --yellow: #ff6a00;
+  --yellow: #be8f451a;
   --white: #fff;
   --grey: #757575;
   --brown: #6f5e4d;
@@ -51,7 +51,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: yellow;
+  background: #be8f451a;
 }
 
 .order_now {
@@ -90,7 +90,7 @@ a {
 
 .icon-container {
   height: 100px;
-  background: #ff6a00;
+  background: #be8f451a;
   width: 100px;
   border-radius: 50%;
   justify-content: center;
@@ -98,4 +98,19 @@ a {
   display: flex;
   color: #fff;
   font-size: 35px;
+}
+
+.my-tabs {
+  border: 1px solid #e6e6e6;
+  border-radius: 0;
+  text-align: left;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.my-tabs.active {
+  color: #ff6a00 !important;
+  border: 1px solid #e6e6e6;
+  border-left: 2px solid #ff6a00 !important;
+  font-weight: 700;
 }
