@@ -8,6 +8,7 @@ import category2 from '../../assets/imgs/product3.webp'
 import product3 from '../../assets/imgs/product4.webp'
 import categor3 from '../../assets/imgs/product5.webp'
 import SectionContainer from '../reUsable/SectionContainer'
+import { Link } from 'react-router-dom';
 
 function CustomCarousel({ children, responsive = {}, loop = true, autoplay = false, autoplayTimeout = 3000 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -175,7 +176,8 @@ function ShopByCategory() {
           autoplayTimeout={5000}
         >
           {categories.map((category) => (
-            <div 
+            <Link
+            to={'/shop'}
               className='category-wrapper'
               key={category.id} 
               style={{
@@ -187,13 +189,19 @@ function ShopByCategory() {
                 textAlign: 'center',
                 aspectRatio:1,
                 display: 'flex',
+                flexDirection:'column',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                color:'#fff'
+
               }}
             >
               <h4 className='category-name'>{category.name}</h4>
-            </div>
+              <small className='fw-light' style={{color:'#fff',zIndex:1000}}>
+                <i className="bi bi-three-dots"></i>
+                Shop Now</small>
+            </Link>
           ))}
         </CustomCarousel>
         </div>

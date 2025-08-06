@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button, Row, Col, Alert, Spinner } from 'react-bootstrap';
 import SectionContainer from '../Components/reUsable/SectionContainer';
-import loginImage from '../assets/imgs/auth/login.webp';
 import { insertData } from '../../utilty/data/api';
+import { useLocation } from 'react-router-dom';
 
 function BookingForm() {
+    const location = useLocation();
+    const serviceData = location.state?.item;
+    // const serviceOptions = [
+    //     'Hair Styling',
+    //     'Hair cut & Hair Styling',
+    //     'Cosmetics Services',
+    //     'Luxury Self-Care Services'
+    // ];
     const [formData, setFormData] = useState({
-        serviceType: 'Hair Styling',
+        serviceType:'',
         date: '',
         timeSlot: '',
         fullName: '',
@@ -21,13 +29,12 @@ function BookingForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const serviceOptions = [
-        'Hair Styling',
-        'Hair cut & Hair Styling',
-        'Hair Colouring',
-        'Blowaving Orising',
-        'Hair Extension'
-    ];
+    // console.log(serviceData)
+
+    useEffect(() => {
+    // Scroll to the top of the page on mount
+    window.scrollTo(0, 0);
+  }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -103,28 +110,33 @@ function BookingForm() {
     };
 
     return (
+        <>
+        <SectionContainer background={"#BE8F451A"}>
+            <h2 className='text-center'>{serviceData?.title}</h2>
+        </SectionContainer>
+    
         <SectionContainer background={"#BE8F4508"}>
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-xl-10">
                         <div className="bg-white">
                             <div className="row g-0">
-                                <div className="col-md-6 col-lg-5 d-none d-md-block">
+                                <div className="col-md-6 d-none d-md-block">
                                     <img 
-                                        src={loginImage}
+                                        src={serviceData?.bgImage}
                                         style={{
                                             height: '100%',
                                             objectFit: 'cover',
-                                            objectPosition: 'left'
+                                            objectPosition: 'center'
                                         }}
                                         alt="Booking form" 
                                         className="img-fluid"
                                     />
                                 </div>
-                                <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div className="col-md-6 d-flex align-items-center">
                                     <div className="card-body p-4 p-lg-5 text-black">
                                         <div className="d-flex align-items-center mb-3 pb-1">
-                                            <span className="h1 fw-bold mb-0">Book Your Appointment</span>
+                                            <span className="h3 fw-bold mb-0">Book Your Appointment</span>
                                         </div>
 
                                         {isSuccess && (
@@ -140,22 +152,24 @@ function BookingForm() {
                                         )}
 
                                         <Form onSubmit={handleSubmit}>
-                                            <Form.Group controlId="serviceType" className="mb-4">
-                                                <Form.Label>Choose a type of hair styling</Form.Label>
+                                            <Form.Group controlId="serviceType" className="mb-2">
+                                                <Form.Label className='small fw-light'>Choose a type of hair styling</Form.Label>
                                                 <Form.Control
                                                     as="select"
                                                     name="serviceType"
+                                                    // defaultValue={serviceOptions.find(service=>service === serviceData?.title)}
                                                     value={formData.serviceType}
                                                     onChange={handleChange}
                                                 >
-                                                    {serviceOptions.map(option => (
-                                                        <option key={option} value={option}>{option}</option>
+                                                    {
+                                                    serviceData?.minServices?.map((option,i) => (
+                                                        <option key={i} value={option?.name}>{option?.name}</option>
                                                     ))}
                                                 </Form.Control>
                                             </Form.Group>
 
-                                            <Form.Group controlId="appointmentDateTime" className="mb-4">
-                                                <Form.Label>When would you like to book your appointment?</Form.Label>
+                                            <Form.Group controlId="appointmentDateTime" className="mb-2">
+                                                <Form.Label className='small fw-light'>When would you like to book your appointment?</Form.Label>
                                                 <Row>
                                                     <Col md={6}>
                                                         <Form.Group>
@@ -190,11 +204,11 @@ function BookingForm() {
                                                 </Row>
                                             </Form.Group>
 
-                                            <Form.Group className="mb-4">
+
                                                 <Row>
-                                                    <Col md={12} className="mb-3 mb-md-0">
+                                                    <Col md={4} className="mb-3 mb-md-0">
                                                         <Form.Group>
-                                                            <Form.Label>Full Name</Form.Label>
+                                                            <Form.Label className='small fw-light'>Full Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 name="fullName"
@@ -208,14 +222,9 @@ function BookingForm() {
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
-                                                </Row>
-                                            </Form.Group>
-
-                                            <Form.Group className="mb-4">
-                                                <Row>
-                                                    <Col md={6} className="mb-3 mb-md-0">
+                                                    <Col md={4} className="mb-3 mb-md-0">
                                                         <Form.Group>
-                                                            <Form.Label>Phone number</Form.Label>
+                                                            <Form.Label className='small fw-light'>Phone number</Form.Label>
                                                             <Form.Control
                                                                 type="tel"
                                                                 name="phoneNumber"
@@ -229,9 +238,9 @@ function BookingForm() {
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
-                                                    <Col md={6}>
+                                                    <Col md={4}>
                                                         <Form.Group>
-                                                            <Form.Label>Email Address</Form.Label>
+                                                            <Form.Label className='small fw-light'>Email Address</Form.Label>
                                                             <Form.Control
                                                                 type="email"
                                                                 name="email"
@@ -246,10 +255,9 @@ function BookingForm() {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                            </Form.Group>
 
-                                            <Form.Group className="mb-4">
-                                                <Form.Label>Any special requests?</Form.Label>
+                                            <Form.Group className="mb-2">
+                                                <Form.Label className='small fw-light'>Any special requests?</Form.Label>
                                                 <Form.Control
                                                     as="textarea"
                                                     rows={3}
@@ -267,6 +275,8 @@ function BookingForm() {
                                                     name="reminder"
                                                     checked={formData.reminder}
                                                     onChange={(e) => setFormData({...formData, reminder: e.target.checked})}
+                                                    style={{color:'#FF6A00'}}
+                                                     className="custom-checkbox"
                                                 />
                                             </Form.Group>
 
@@ -275,7 +285,8 @@ function BookingForm() {
                                                     variant="primary" 
                                                     type="submit" 
                                                     disabled={isSubmitting}
-                                                    style={{ padding: '10px 15px' }}
+                                                    style={{ padding: '10px 15px',display:'flex',width:'100%' }}
+                                                    className='order_now justify-content-center'
                                                 >
                                                     {isSubmitting ? (
                                                         <>
@@ -288,7 +299,7 @@ function BookingForm() {
                                                             />
                                                             <span className="ms-2">Submitting...</span>
                                                         </>
-                                                    ) : 'Submit Booking'}
+                                                    ) : 'Submit'}
                                                 </Button>
                                             </div>
                                         </Form>
@@ -300,6 +311,7 @@ function BookingForm() {
                 </div>
             </div>
         </SectionContainer>
+        </>
     );
 }
 

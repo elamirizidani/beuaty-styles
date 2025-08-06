@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate,Navigate } from 'react-router-dom';
 import loginImage from '../assets/imgs/auth/login.webp'
+import signUpImage from '../assets/imgs/auth/signUp.webp'
 import SectionContainer from '../Components/reUsable/SectionContainer'
 import { Tab, Tabs } from 'react-bootstrap';
 import { useAuthStore } from '../store/authStore';
@@ -13,10 +14,16 @@ function Login() {
     const [names,setNames] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false);
+    const [activeTab, setActiveTab] = useState('signin');
     // const [showLogin,setShowLogin] = useState(true)
 
     const { adminLogin,userRegistration,isLoggedIn } = useAuthStore();
 
+const handleTabSelect = (key) => {
+        setActiveTab(key);
+        // Clear form errors when switching tabs
+        setError('');
+    };
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +35,8 @@ function Login() {
         
         if(userRole.status)
         {
-            console.log(userRole.role)
-            console.log(userRole?.role?.toLowerCase() === 'admin')
+            // console.log(userRole.role)
+            // console.log(userRole?.role?.toLowerCase() === 'admin')
              if (userRole?.role?.toLowerCase() === 'admin') {
                 navigate('/admin');
             } else {
@@ -94,16 +101,17 @@ function Login() {
             <div className="col col-xl-10">
                 <div className="bg-white" >
                 <div className="row g-0">
-                    <div className="col-md-6 col-lg-5 d-none d-md-block">
-                    <img src={loginImage}
+                    <div className="col-md-7 d-none d-md-block">
+                    <img src={activeTab === 'signin' ? loginImage : signUpImage}
                         style={{
                             height:'100%',
                             objectFit:'cover',
-                            objectPosition:'left'
+                            objectPosition:activeTab === 'signin' ? 'left':'center'
                         }}
-                        alt="login form" className="img-fluid"/>
+                        alt={activeTab === 'signin' ? "Login" : "Sign Up"} 
+                        className="img-fluid"/>
                     </div>
-                    <div className="col-md-6 col-lg-7 d-flex align-items-center">
+                    <div className="col-md-5 d-flex align-items-center">
                     <div className="card-body p-4 p-lg-5 text-black">
 
                         <div className="d-flex align-items-center mb-3 pb-1">
@@ -113,6 +121,8 @@ function Login() {
 
                         <Tabs
                             defaultActiveKey="signin"
+                            activeKey={activeTab}
+                            onSelect={handleTabSelect}
                             transition={false}
                             id="noanim-tab-example"
                             className="mb-3"
@@ -120,9 +130,7 @@ function Login() {
                             <Tab eventKey="signin" title="Sign In">
                                <form onSubmit={handleSubmit}>
                                     
-
                                     {/* <h5 className="fw-normal mb-3 pb-3" style={{letterSpacing: 1}}>Sign in</h5> */}
-
                                     <div data-mdb-input-init className="form-outline mb-4">
                                         <label className="form-label" for="form2Example17">Email address</label>
                                         <input type="email"
@@ -149,12 +157,12 @@ function Login() {
                                             )
                                         }
 
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn order_now" disabled={loading} style={{ padding: '10px 15px', width: '100%' }}>
-                                            {loading ? 'Logging in...' : 'Login'}
+                                        <a className="small text-end mb-3" href="#" style={{color:'#ff6a00'}}>Forgot password?</a>
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn order_now" disabled={loading} style={{ padding: '10px 15px', width: '100%',textTransform:'capitalize' }}>
+                                            {loading ? 'Signing in...' : 'Sign in'}
                                         </button>
 
                                     </div>
-                                    <a className="small text-muted" href="#!">Forgot password?</a>
                                 </form>
                             </Tab>
                             <Tab eventKey="signout" title="Sign Up">

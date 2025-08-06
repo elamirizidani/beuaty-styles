@@ -17,7 +17,7 @@ const [show, setShow] = useState(true);
     <header>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#">Hea & Co.</Navbar.Brand>
+        <Navbar.Brand href="#" className='site-logo'>Hea & Co.</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -39,6 +39,7 @@ const [show, setShow] = useState(true);
             }
           </Nav>
           <div className="d-flex align-items-center gap-3">
+            <i class="bi bi-search" style={{fontSize:'24px'}}></i>
             <CartModal />
             {
               isLoggedIn &&

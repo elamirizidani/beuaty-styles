@@ -17,7 +17,7 @@ export default function CuratedKits(){
                 <Row className='container curated-column-wrapper'>
                    <Col md={6} className='curated-column  curated'>
                      
-                     <h2 className="title-text text-black section-title">
+                     <h2 className="title-text text-black">
                         Curly Hair <br/>Essentials Kit
                      </h2>
                      <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
@@ -25,7 +25,7 @@ export default function CuratedKits(){
 
                    </Col>
                    <Col md={6} className='curated-column-right curated'>
-                     <h2 className="title-text text-black section-title">
+                     <h2 className="title-text text-black">
                         Beard Grooming Set
                      </h2>
                      <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
@@ -36,7 +36,7 @@ export default function CuratedKits(){
                 <Row className='container curated-column-wrapper2'>
                    <Col md={6} className='curated-column-right  curated'>
                      
-                     <h2 className="title-text text-black section-title">
+                     <h2 className="title-text text-black">
                         Hydration Starter Pack
                      </h2>
                      <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>

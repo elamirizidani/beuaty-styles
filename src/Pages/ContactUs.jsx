@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SectionContainer from '../Components/reUsable/SectionContainer'
 import { Col, Container, Row } from 'react-bootstrap';
-import loginImage from '../assets/imgs/auth/login.webp';
+import loginImage from '../assets/imgs/contact/contact-img.webp';
 import { insertData } from '../../utilty/data/api';
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -62,6 +62,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <>
+    
     <SectionContainer background={"#BE8F451A"}>
       <Container>
         <Row>
@@ -83,11 +84,11 @@ const [isSubmitting, setIsSubmitting] = useState(false);
             <h4>
             Email Address
           </h4>
-          <p style={{ color: '#555' }}>info@Goldo.Com</p>
+          <p style={{ color: '#555' }}>Deborahkitenge@gmail.com</p>
           </Col>
             <Col className='justify-content-center align-items-center d-flex flex-column' md={6}>
             <div className='icon-container'>
-              <i class="bi bi-telephone-outbound"></i>
+              <i class="bi bi-telephone"></i>
             </div>
             <h4>
             Phone Number
@@ -99,7 +100,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       </Container>
     </SectionContainer>
 
-
+<SectionContainer background={"#fff"}>
     <div className="container" style={{  padding: '2rem' }}>
 
 
@@ -116,10 +117,10 @@ const [isSubmitting, setIsSubmitting] = useState(false);
                                           style={{
                                               height: '100%',
                                               objectFit: 'cover',
-                                              objectPosition: 'left'
+                                              objectPosition: 'right'
                                           }}
                                           alt="Booking form" 
-                                          className="img-fluid"
+                                          className="img-fluid rounded-2"
                                       />
                                   </div>
 <Col md='6'>
@@ -130,7 +131,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         <div className="row mb-3">
           <div className="col-md-6 mb-3 mb-md-0">
             <label htmlFor="fullName" className="form-label" style={{
-              fontWeight: 'bold',
+              
               display: 'block',
               marginBottom: '0.5rem'
             }}>
@@ -153,7 +154,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
           </div>
           <div className="col-md-6">
             <label htmlFor="email" className="form-label" style={{
-              fontWeight: 'bold',
+              
               display: 'block',
               marginBottom: '0.5rem'
             }}>
@@ -178,31 +179,34 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 
         <div className="mb-3">
           <label htmlFor="about" className="form-label" style={{
-            fontWeight: 'bold',
+            
             display: 'block',
             marginBottom: '0.5rem'
           }}>
             What is This About?
           </label>
-          <input
-            type="text"
-            className="form-control"
+          <select className="form-control"
             id="about"
-            name="about"
-            value={formData.about}
+            name="about" value={formData.about}
             onChange={handleChange}
-            required
             style={{
               border: '1px solid #ddd',
               borderRadius: '4px',
               padding: '0.8rem'
             }}
-          />
+            >
+            <option value="Product Question">Product Question</option>
+            <option value="Service Appointment">Service Appointment</option>
+            <option value="Order/Delivery Issue">Order/Delivery Issue</option>
+            <option value="Feedback or Suggestion">Feedback or Suggestion</option>
+            <option value="Other">Other</option>
+          </select>
+          
         </div>
 
         <div className="mb-4">
           <label htmlFor="message" className="form-label" style={{
-            fontWeight: 'bold',
+            
             display: 'block',
             marginBottom: '0.5rem'
           }}>
@@ -262,6 +266,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 </Row>
       
     </div>
+    </SectionContainer>
     </>
   );
 };

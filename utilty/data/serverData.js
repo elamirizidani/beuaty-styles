@@ -1,4 +1,10 @@
-import leftbgImage from '../../src/assets/imgs/leftbg.webp'
+import booking from '../../src/assets/imgs/bookings/booking.webp'
+import booking1 from '../../src/assets/imgs/bookings/booking1.jpg'
+import booking2 from '../../src/assets/imgs/bookings/booking2.jpg'
+import booking3 from '../../src/assets/imgs/bookings/booking3.webp'
+
+
+
 
 
 export const PRODUCTS = [
@@ -33,102 +39,98 @@ export const PRODUCTS = [
 
 export const SERVICES = [
         {
-            bgImage:leftbgImage,
+            bgImage:booking,
             title:'Hair Styling Services',
             minServices:[
                 {
-                    name:'Hair Styling',
+                    name:'Blowout',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair cut & Hair Styling',
+                    name:'Haircut and Trim',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Colouring',
+                    name:'Updo Styling',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Blowaving Orising',
+                    name:'Braiding Services',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Extension',
+                    name:'Flat Iron',
                     price:'From 20 to 80 £'
                 }
             ]
         },{
-            bgImage:leftbgImage,
+            bgImage:booking1,
             title:'Make-up Services',
             minServices:[
                 {
-                    name:'Hair Styling',
+                    name:'Bridal Make-up,Event/Party Make-up',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair cut & Hair Styling',
+                    name:'Natural/Day Make-up',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Colouring',
+                    name:'Editorial/Photoshoot Make-up',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Blowaving Orising',
-                    price:'From 20 to 80 £'
-                },
-                {
-                    name:'Hair Extension',
+                    name:'Make-up Lessons',
                     price:'From 20 to 80 £'
                 }
             ]
         },{
-            bgImage:leftbgImage,
+            bgImage:booking2,
             title:'Cosmetics Services',
             minServices:[
                 {
-                    name:'Hair Styling',
+                    name:'Facials',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair cut & Hair Styling',
+                    name:'Chemical Peels',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Colouring',
+                    name:'Microdermabrasion',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Blowaving Orising',
+                    name:'Eyebrow Shaping & Tinting',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Extension',
+                    name:'Eyelash Extensions',
                     price:'From 20 to 80 £'
                 }
             ]
         },{
-            bgImage:leftbgImage,
-            title:' Beard Trim & Shape',
+            bgImage:booking3,
+            title:'Luxury Self-Care Services',
             minServices:[
                 {
-                    name:'Hair Styling',
+                    name:'Skin Rejuvenation Treatments',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair cut & Hair Styling',
+                    name:'Teeth Whitening',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Colouring',
+                    name:'Makeup Lessons',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Blowaving Orising',
+                    name:'Scalp Treatments',
                     price:'From 20 to 80 £'
                 },
                 {
-                    name:'Hair Extension',
+                    name:'Anti-Aging Facials',
                     price:'From 20 to 80 £'
                 }
             ]

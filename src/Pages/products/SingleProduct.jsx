@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useLocation } from 'react-router-dom';
-import { Card, Row, Col, Button, Container } from 'react-bootstrap';
+import {  Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import './aiProduct.css'
 import productImage from '../../assets/imgs/products/product.png'
@@ -8,9 +8,10 @@ import { fetchData } from '../../../utilty/data/api';
 import { useAuthStore } from '../../store/authStore';
 import SectionContainer from '../../Components/reUsable/SectionContainer';
 import TitleStyled from '../../Components/reUsable/TitleStyled';
-import leftbgImage from '../../assets/imgs/leftbg.webp'
+import UpperFooterPart from '../../Components/footer/UpperFooterPart';
+import NotSure from '../../Components/NotSure';
 function SingleProduct() {
-  const { changeShowProfile,isLoggedIn,addToCart } = useAuthStore();
+  const { addToCart } = useAuthStore();
     const location = useLocation();
   const productData = location.state?.product;
   const [loading, setLoading] = useState(true);
@@ -69,34 +70,7 @@ useEffect(() => {
         </Container></SectionContainer>
 
 
-    <Row className='pt-4'>
-                <Col lg={6} className='left-container'
-                 style={{
-                    backgroundImage: `url(${leftbgImage})`,
-                    backgroundRepeat: 'no-repeat',                            
-                    backgroundSize: 'cover',                                 
-                    backgroundPosition: 'center center', 
-                }}
-                >
-                </Col>
-                 <Col lg={6} className='right-container'> 
-                   <div className='right-inner-wrapper'>
-                      <h2 className="title-text text-black section-title">
-                             Not Sure What to Choose?
-                      </h2>
-                      <span className='text-center'>Tell us about your hair type, skin needs, and grooming goals and we’ll show you exactly what fits you best.</span>
-                      {
-                        isLoggedIn ? 
-                        <Link onClick={()=>changeShowProfile()} className='btn order_now curated-btn'>Create My Beauty Profile</Link>
-                        :
-                        <Link to='/login' className='btn order_now curated-btn'>Create My Beauty Profile</Link>
-                      }
-                      
-                      <font color='#FF6A00'>Takes less than a minute</font>
-                   </div>
-                    
-                </Col>
-              </Row>
+    <NotSure />
 
     
 
@@ -144,7 +118,8 @@ useEffect(() => {
                         <strong>Why it's for you:</strong> {product.description}
                       </p>
                     </div>
-                    <Link onClick={()=>addToCart(product._id,1)} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
+                    <Link onClick={()=>addToCart(product._id,1)} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center align-items-center gap-2'>
+                    <i className="bi bi-handbag" style={{fontSize:'24px'}}></i>
                                           Add to Bag
                                         </Link>
                   </div>
@@ -164,7 +139,7 @@ useEffect(() => {
         </Container>
     </SectionContainer>
 
-
+    <UpperFooterPart/>
     </>
   )
 }

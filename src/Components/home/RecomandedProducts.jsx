@@ -87,7 +87,8 @@ function RecomandedProducts() {
                     {/* <Link to={`/product/${product.id}`} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
                       Add to Bag
                     </Link> */}
-                    <Link onClick={()=>addToCart(product._id,1)} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center'>
+                    <Link onClick={()=>addToCart(product._id,1)} style={{width:'100%'}} className='btn order_now border-0 rounded-0 d-flex justify-content-center align-items-center gap-2'>
+                    <i className="bi bi-handbag" style={{fontSize:'24px'}}></i>
                                           Add to Bag
                                         </Link>
                   </div>

@@ -1,18 +1,22 @@
 .hero_section {
   position: relative;
   /* min-height: 750px; */
-  background: url("../../assets/imgs/hero.webp");
+  /* background: url("../../assets/imgs/hero.webp"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center right;
   background-attachment: fixed;
   padding-top: 170px;
   padding-bottom: 90px;
+  transition: background-image 1s ease-in-out;
 }
 .hero-content-container {
   background: #ffffff33;
   border-radius: 6px;
-  padding: 60px 40px;
+  padding: 100px 40px;
+}
+.here-title {
+  font-size: 48px;
 }
 
 .creterias {
@@ -21,8 +25,13 @@
 }
 
 .card-icon-container {
-  font-size: 36px;
+  margin-top: -5px;
+  font-size: 26px;
   color: #ff6a00;
+}
+
+.card-body small {
+  color: #5e5e5e;
 }
 
 .shop-by-category {

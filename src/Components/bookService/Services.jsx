@@ -14,9 +14,9 @@ function Services() {
                 {
                     SERVICES?.map((item,index)=>{
                         return(
-                        <LeftRightItems key={index} itemIndex={index} item={item} leftbgImage={leftbgImage}>
+                        <LeftRightItems key={index} itemIndex={index} item={item} leftbgImage={item?.bgImage}>
                             <div className='right-inner-wrapper align-items-stretch' style={{flex:1}}>
-                                <h2 className="text-start title-text text-black section-title">{item.title}</h2>
+                                <h2 className="text-start title-text text-black">{item.title}</h2>
                                 <ul className='list-group'>
                                 {
                                     item?.minServices?.map((servive,i)=>{
@@ -26,11 +26,13 @@ function Services() {
                                             <span>{servive.price}</span>
                                         </li>
                                         )
-                                        
                                     })
                                 }
                                 </ul>
-                                <Link to='/bookingForm' className='btn order_now curated-btn'> Book Now</Link>
+                                <Link to='/bookingForm'
+                                    state={{ item }} 
+                                    className='btn order_now curated-btn'> Book Now</Link>
+
                             </div>
                         </LeftRightItems>
                     )

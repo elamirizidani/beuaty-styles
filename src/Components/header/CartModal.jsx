@@ -79,7 +79,8 @@ const CartModal = () => {
         onClick={handleShow}
         style={{ cursor: 'pointer' }}
       >
-        <FaShoppingCart size={20} className="text-dark" />
+        {/* <FaShoppingCart size={20} className="text-dark" /> */}
+        <i className="bi bi-handbag" style={{fontSize:'24px'}}></i>
         {(cartItems.length > 0 && isLoggedIn)&& (
           <Badge 
             pill 
