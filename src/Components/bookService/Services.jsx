@@ -22,7 +22,7 @@ function Services() {
                                     item?.minServices?.map((servive,i)=>{
                                         return(
                                             <li key={i} className='d-flex justify-content-between'>
-                                            <h6><strong>{servive?.name}</strong></h6>
+                                            <p className='h6'><strong>{servive?.name}</strong></p>
                                             <span>{servive.price}</span>
                                         </li>
                                         )
