@@ -319,8 +319,8 @@ const AdminDashboard = () => {
                   <div className="flex items-center">
                     <Star className="w-4 h-4 text-yellow-400 fill-current" />
                     <span className="ml-1 text-sm text-gray-600">
-                      {product.reviews.length > 0 
-                        ? (product.reviews.reduce((sum, r) => sum + r.rating, 0) / product.reviews.length).toFixed(1)
+                      {product?.reviews?.length > 0 
+                        ? (product.reviews.reduce((sum, r) => sum + r?.rating, 0) / product.reviews.length).toFixed(1)
                         : 'No reviews'
                       }
                     </span>

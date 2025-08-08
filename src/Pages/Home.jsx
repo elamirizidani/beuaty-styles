@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import ProductSlider from '../Components/home/ProductSlider'
 import { useMediaQuery } from 'react-responsive'
 import UpperFooterPart from '../Components/footer/UpperFooterPart'
+import Testmonies from '../Components/home/Testmonies'
 function index() {
   // const { isLoggedIn } = useContext(AuthContext)
    const { isLoggedIn,user } = useAuthStore();
@@ -60,6 +61,7 @@ function index() {
         }
         <WithFullWidth />
         <CuratedKits />
+        <Testmonies/>
         <TipsRoutines />
         <UpperFooterPart/>
     </>

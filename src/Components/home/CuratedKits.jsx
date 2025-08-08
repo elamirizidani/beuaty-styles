@@ -40,11 +40,11 @@ export default function CuratedKits(){
                         Hydration Starter Pack
                      </h2>
                      <Link to='/shop' className='btn order_now curated-btn'> Shop Now</Link>
-                   
-
+                  
                    </Col>
                    <Col md={6} className='curated-column-right1 curated'>
-                      <img src={cutieImage} alt=''className='img-fluiding '/>
+                      <img src={cutieImage} alt='' style={{height: '100%',
+                        objectFit: 'cover'}}/>
                    </Col>
                 </Row>
         </Container>

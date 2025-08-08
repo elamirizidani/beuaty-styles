@@ -36,7 +36,7 @@ export default function AppRouter() {
   const { initialize } = useAuthStore();
   useEffect(()=>{
     initialize()
-  },[])
+  },[initialize])
 
   return (
     <Routes>

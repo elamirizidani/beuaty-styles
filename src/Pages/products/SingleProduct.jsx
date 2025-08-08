@@ -10,6 +10,7 @@ import SectionContainer from '../../Components/reUsable/SectionContainer';
 import TitleStyled from '../../Components/reUsable/TitleStyled';
 import UpperFooterPart from '../../Components/footer/UpperFooterPart';
 import NotSure from '../../Components/NotSure';
+import ProductReviews from '../../Components/products/ProductReviews';
 function SingleProduct() {
   const { addToCart } = useAuthStore();
     const location = useLocation();
@@ -67,6 +68,7 @@ useEffect(() => {
                     </div>
                 </div>
             </div>
+            <ProductReviews productId={productData?._id}/>
         </Container></SectionContainer>
 
 

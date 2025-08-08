@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap'
 import TitleStyled from '../reUsable/TitleStyled';
-import product1 from '../../assets/imgs/products/product.png'
-import category from '../../assets/imgs/category.jpg'
-import product2 from '../../assets/imgs/product2.webp'
-import category2 from '../../assets/imgs/product3.webp'
-import product3 from '../../assets/imgs/product4.webp'
-import categor3 from '../../assets/imgs/product5.webp'
 import SectionContainer from '../reUsable/SectionContainer'
 import { fetchData } from '../../../utilty/data/api';
-import productImage from '../../assets/imgs/products/product.png'
-import { Link } from 'react-router-dom';
+import defaultImg from '../../assets/imgs/default-avatar.png'
+
 function CustomCarousel({ children, responsive = {}, loop = true, autoplay = false, autoplayTimeout = 3000 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
@@ -102,7 +96,7 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
           transition: 'transform 0.3s ease',
           transform: `translateX(-${currentSlide * (100 / itemsToShow)}%)`,
           width: `${100 * (totalSlides / itemsToShow)}%`,
-        //   gap: "32px"
+          gap: "32px"
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -135,7 +129,7 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
               width: currentSlide === index ? "25px" :'10px',
               height: '10px',
               borderRadius: currentSlide === index  ? "20px" : '50%',
-              backgroundColor:'#fff',
+              backgroundColor: currentSlide === index ? '#FFFFFF' : '#FFFFFF33',
               margin: '0 5px',
               padding: 0,
               border: 'none',
@@ -149,67 +143,85 @@ function CustomCarousel({ children, responsive = {}, loop = true, autoplay = fal
   );
 }
 
-function ProductSlider() {
-  const responsive = {
-    0: { items: 1 },
-    600: { items: 2 },
-    1000: { items: 3 },
-  };
 
- 
-    const [loading, setLoading] = useState(true);
-const [recomandedsData,setRecomandedData] = useState([])
 
-  useEffect(() => {
-      (async () => {
-          setLoading(true)
-          try {
-          const res = await fetchData('recommendations/content-based');
-          // console.log(res.recommendedProducts);
-          setRecomandedData(res.recommendedProducts);
-          } catch (err) {
-          console.error('Error fetching data:', err);
-          }
-          finally{
-              setLoading(false)
-          }
-      })();
-      }, []);
+function Testmonies() {
+
+const [loading, setLoading] = useState(true);
+const [review,setReviews] = useState([])
+
+    const responsive = {
+        0: { items: 1 },
+        600: { items: 2 },
+        1000: { items: 2.3 },
+      };
+
+       useEffect(() => {
+            (async () => {
+                setLoading(true)
+                try {
+                const res = await fetchData('reviews/latest');
+                // console.log(res.recommendedProducts);
+                setReviews(res);
+                } catch (err) {
+                console.error('Error fetching data:', err);
+                }
+                finally{
+                    setLoading(false)
+                }
+            })();
+            }, []);
+    
 
   return (
+    <SectionContainer background={'#141414'}>
+        <Container>
+            <h2 className="title-text text-white text-center">
+                          Real Results. Real Experiences.
+                  </h2>
+        <div className='py-5'>
         <CustomCarousel
           responsive={responsive}
           loop={true}
           autoplay={true}
           autoplayTimeout={5000}
         >
-          {recomandedsData.map((product,i) => (
-            <Link to={`/Product`}
-                                                state={{ product }} key={i}>
-                <img 
-                    src={product?.productImage || productImage} 
-                    // className="card-img-top" 
-                    style={{
-                    backgroundImage: `url(${category.img})`,
-                    backgroundSize: 'cover',
-                    height:'370px',
-                    width:'250px',
-                    backgroundPosition: 'center',
-                    // borderRadius: '50%',
-                    // padding: '25px',
-                    textAlign: 'center',
-                    aspectRatio:1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-                    alt={product.name}
-                    onError={(e) => {e.target.src = productImage}}
-                />
-            </Link>
+          { !loading &&
+          review?.map((review) => (
+            <div
+              key={review._id} 
+              style={{
+                padding:'32px',
+                gap:'20px',
+                backgroundColor:'#FFFFFF'
+              }}
+            >
+              <p>{review?.comment}</p>
+              <div className="d-flex align-items-center mb-2">
+                                <img 
+                                  src={review?.userId?.profilePicture || defaultImg} 
+                                  alt={review?.userId?.name}
+                                  style={{ 
+                                    width: '40px', 
+                                    height: '40px', 
+                                    borderRadius: '50%', 
+                                    marginRight: '10px' 
+                                  }}
+                                />
+                                <div>
+                                  <p className="h5 mb-0 fw-bold">{review?.userId?.name}</p>
+                                </div>
+                              </div>
+            </div>
           ))}
         </CustomCarousel>
-  );
+        </div>
+
+
+
+        </Container>
+    </SectionContainer>
+  )
 }
 
-export default ProductSlider;
+export default Testmonies
