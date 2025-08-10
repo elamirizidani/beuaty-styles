@@ -7,6 +7,7 @@ import CartModal from './CartModal';
 import UserPref from './UserPref';
 import { useAuthStore } from '../../store/authStore';
 import SideModel from './SideModel';
+import SearchFilter from './SearchFilter';
 export default function Header() {
   const [expanded, setExpanded] = useState(false);
   const { isLoggedIn,adminLogout,user,changeShowProfile } = useAuthStore();
@@ -25,7 +26,6 @@ export default function Header() {
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0 justify-content-center flex-grow-1"
-            // style={{ maxHeight: '100px' }}
             navbarScroll
           >
             <Nav.Link as={Link} onClick={handleNavItemClick} to='/'>Home</Nav.Link>
@@ -42,14 +42,15 @@ export default function Header() {
             }
           </Nav>
           <div className="d-flex align-items-center gap-3">
-            <i class="bi bi-search" style={{fontSize:'24px'}}></i>
+            {/* <i class="bi bi-search" style={{fontSize:'24px'}}></i> */}
+            <SearchFilter/>
             <CartModal />
             {
               isLoggedIn &&
               <>
-              <UserPref/>
-            <SideModel/>
-            </>
+                <UserPref/>
+                <SideModel/>
+              </>
             
 }
             {

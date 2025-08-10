@@ -62,7 +62,6 @@ const [tempToken,setTempToken]=useState('')
       const response = await insertData('auth/request-password-reset', {
         email:email
 });
-console.log(response)
     //   const data = await response.json();
 
       if (response.success) {

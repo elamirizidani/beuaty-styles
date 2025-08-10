@@ -62,7 +62,7 @@ function HeroSection() {
         <Container>
             <Row>
                 <Col md={6} className='mb-5 mb-md-0 col-md-6'>
-                <div className='hero-content-container p-sm-2'>
+                <div className='hero-content-container'>
                     <h1 className='text-white here-title'>
                         Your<br/> Personalized Hair <br/>& Beauty Store
                     </h1>
