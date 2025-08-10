@@ -5,9 +5,11 @@ import signUpImage from '../assets/imgs/auth/signUp.webp'
 import SectionContainer from '../Components/reUsable/SectionContainer'
 import { Tab, Tabs } from 'react-bootstrap';
 import { useAuthStore } from '../store/authStore';
+import ForgetPsw from '../Components/Auth/ForgetPsw';
 
 function Login() {
     const navigate = useNavigate();
+      const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [confirmPassword,setConfirmPassword] = useState('')
@@ -95,6 +97,7 @@ const handleTabSelect = (key) => {
 
 
   return (
+    <>
     <SectionContainer background={"#BE8F4508"}>
         <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -157,7 +160,7 @@ const handleTabSelect = (key) => {
                                             )
                                         }
 
-                                        <a className="small text-end mb-3" href="#" style={{color:'#ff6a00'}}>Forgot password?</a>
+                                        <a className="small text-end mb-3" onClick={()=>setShowForgotPassword(true)} href="#" style={{color:'#ff6a00'}}>Forgot password?</a>
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn order_now" disabled={loading} style={{ padding: '10px 15px', width: '100%',textTransform:'capitalize' }}>
                                             {loading ? 'Signing in...' : 'Sign in'}
                                         </button>
@@ -231,6 +234,11 @@ const handleTabSelect = (key) => {
             </div>
         </div>
     </SectionContainer>
+    <ForgetPsw
+    show={showForgotPassword}
+        handleClose={() => setShowForgotPassword(false)}
+        />
+    </>
   )
 }
 

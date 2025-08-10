@@ -8,37 +8,61 @@ import img2 from '../../assets/imgs/hero2.webp'
 import img3 from '../../assets/imgs/hero3.webp'
 
 
-const images = [img1,img2,img3,
-];
+const images = [img1,img2,img3];
 
 function HeroSection() {
     const isMediumUp = useMediaQuery({ minWidth: 768 });
-
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-        setCurrentIndex(prev => (prev + 1) % images.length);
-        }, 5000);
-        return () => clearInterval(interval);
+        const preloadImages = async () => {
+            const imagePromises = images.map(src => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = resolve;
+                    img.onerror = reject;
+                    img.src = src;
+                });
+            });
+            
+            try {
+                await Promise.all(imagePromises);
+                setImagesLoaded(true);
+            } catch (error) {
+                console.error('Error preloading images:', error);
+                setImagesLoaded(true); // Still show the component
+            }
+        };
+        preloadImages();
     }, []);
 
+    useEffect(() => {
+        if (!imagesLoaded) return;
+        
+        const interval = setInterval(() => {
+            setCurrentIndex(prev => (prev + 1) % images.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [imagesLoaded]);
 
   return (
     
     <section className='hero_section align-items-center d-flex' 
-    
     style={{
         backgroundImage: `url(${images[currentIndex]})`,
-        height:isMediumUp ? '750px':undefined,
-        backgroundRepeat: 'no-repeat',                            
-                    backgroundSize: 'cover',                                 
-                    backgroundPosition: 'center center', 
-    }}>
+        height: isMediumUp ? '750px' : '450px',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        transition: 'opacity 0.6s ease-in-out',
+    }}
+    
+    >
         <Container>
             <Row>
-                <Col lg={6} className='mb-5 mb-lg-0'>
-                <div className='hero-content-container'>
+                <Col md={6} className='mb-5 mb-md-0 col-md-6'>
+                <div className='hero-content-container p-sm-2'>
                     <h1 className='text-white here-title'>
                         Your<br/> Personalized Hair <br/>& Beauty Store
                     </h1>

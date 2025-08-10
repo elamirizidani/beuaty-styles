@@ -8,32 +8,35 @@ import UserPref from './UserPref';
 import { useAuthStore } from '../../store/authStore';
 import SideModel from './SideModel';
 export default function Header() {
+  const [expanded, setExpanded] = useState(false);
+  const { isLoggedIn,adminLogout,user,changeShowProfile } = useAuthStore();
+  const [show, setShow] = useState(true);
 
-  const { isLoggedIn,adminLogout,user } = useAuthStore();
-const [show, setShow] = useState(true);
-
-// console.log('logged user',user)
+  const handleNavItemClick = () => {
+      setExpanded(false);
+    };
+    
   return (
     <header>
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" expanded={expanded} onToggle={(expanded) => setExpanded(expanded)}>
       <Container>
         <Navbar.Brand href="#" className='site-logo'>Hea & Co.</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle aria-controls="navbarScroll" onClick={() => setExpanded(expanded ? false : true)} />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0 justify-content-center flex-grow-1"
-            style={{ maxHeight: '100px' }}
+            // style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link as={Link} to='/'>Home</Nav.Link>
-            <Nav.Link  as={Link} to='/bookService'>Book service</Nav.Link>
-            <Nav.Link as={Link} to='/shop'>Shop</Nav.Link>
-            <Nav.Link as={Link} to="/contact">
+            <Nav.Link as={Link} onClick={handleNavItemClick} to='/'>Home</Nav.Link>
+            <Nav.Link  as={Link} onClick={handleNavItemClick} to='/bookService'>Book service</Nav.Link>
+            <Nav.Link as={Link} onClick={handleNavItemClick} to='/shop'>Shop</Nav.Link>
+            <Nav.Link as={Link} onClick={handleNavItemClick} to="/contact">
               Contact us
             </Nav.Link>
             {
               isLoggedIn &&
-              <Nav.Link as={Link} to="/MyAccount">
+              <Nav.Link as={Link} onClick={handleNavItemClick} to="/MyAccount">
               My Account
             </Nav.Link>
             }
@@ -52,12 +55,15 @@ const [show, setShow] = useState(true);
             {
               isLoggedIn ?
               <>
-                <button onClick={()=>adminLogout()} className="btn order_now">
+                <button onClick={()=>{
+                  adminLogout()
+                  handleNavItemClick()
+                  }} className="btn order_now">
                     Sign Out
                 </button>
               </>
               :
-              <Link to='/login' variant="outline-success" className='btn order_now'>Sign in/Sign Up</Link>
+              <Link to='/login' onClick={handleNavItemClick} variant="outline-success" className='btn order_now'>Sign in/Sign Up</Link>
             }
           </div>
         </Navbar.Collapse>
@@ -66,7 +72,7 @@ const [show, setShow] = useState(true);
 
 {
   (isLoggedIn && !user?.preferences) &&
-  <ToastContainer position="end" className="p-3" style={{ zIndex: 1,right:0 }}>
+  <ToastContainer onClick={()=>changeShowProfile()} position="end" className="p-3" style={{ zIndex: 1,right:0 }}>
         <Toast bg='danger' onClose={() => setShow(false)} show={show} delay={30000} autohide>
           <Toast.Header>
             <strong className="me-auto">Update your preferences.</strong>

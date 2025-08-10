@@ -12,8 +12,8 @@ export const useAuthStore = create((set, get) => ({
   showProfileEdit: false,
 
   changeShowProfile: () => {
-    const currentState = get().showProfileEdit; // Get the current boolean value
-    set({ showProfileEdit: !currentState }); // Toggle the boolean
+    const currentState = get().showProfileEdit;
+    set({ showProfileEdit: !currentState });
   },
 
   checkAuth: async () => {
