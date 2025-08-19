@@ -65,7 +65,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     
     <SectionContainer background={"#BE8F451A"}>
       <Container>
-        <Row>
+        <Row className='row p-4'>
           <Col className='justify-content-center d-flex flex-column' md={6}>
           <h2>
             WE'RE HERE TO HELP.

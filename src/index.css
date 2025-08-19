@@ -222,3 +222,21 @@ a {
   font-size:24px
 }
 }
+
+
+.sidebar {
+  background-color: #ffffff;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  border-right: 1px solid #e9ecef;
+  transition: "width 0.3s ease";
+}
+
+
+.site-body {
+  transition: "width 0.3s ease";
+}

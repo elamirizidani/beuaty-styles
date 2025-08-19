@@ -10,6 +10,7 @@ export const useAuthStore = create((set, get) => ({
   userRole:null,
   loading:true,
   showProfileEdit: false,
+showMenuLabel:true,
 
   changeShowProfile: () => {
     const currentState = get().showProfileEdit;
