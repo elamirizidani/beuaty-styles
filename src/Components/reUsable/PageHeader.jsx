@@ -1,13 +1,15 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import { useMediaQuery } from 'react-responsive';
 function PageHeader({bgImage,title}) {
+  const isMediumUp = useMediaQuery({ minWidth: 768 });
   return (
       <div className='jumbotron text-white bg-dark'
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: '100% 20%',
-        height: '550px',
+        height: isMediumUp ? '550px' : '350px',
         width: '100%',
       }}
       >

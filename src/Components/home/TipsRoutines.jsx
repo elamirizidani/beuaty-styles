@@ -13,8 +13,8 @@ export default function TipsRoutines(){
                  <Row className='justify-content-between'>
 
             
-                    <Col md={6}><TitleStyled title={'Tips & Routines from the Experts'}/></Col>
-                    <Col md={6} className='d-flex justify-content-end'><Link to='/' className='btn order_now'>Visit Learn Center</Link></Col>
+                    <Col xs={6} sm={6} md={6}><TitleStyled title={'Tips & Routines from the Experts'}/></Col>
+                    <Col xs={4} sm={4} md={6} className='d-flex justify-content-end'><Link to='/' className='btn order_now'>Visit Learn Center</Link></Col>
 
                 </Row>
                 <Row className='container'>

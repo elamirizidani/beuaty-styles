@@ -37,8 +37,8 @@ const [productsData,setProductsData] = useState([])
     <SectionContainer>
         <Container>
             <Row className='justify-content-between'>
-                <Col lg={6}><TitleStyled title={'Popular Right Now'}/></Col>
-                <Col lg={6} className='d-flex justify-content-end'><Link to='/shop' className='btn order_now'>Browse All Products</Link></Col>
+                <Col xs={6} sm={6} md={6}><TitleStyled title={'Popular Right Now'}/></Col>
+                <Col xs={6} sm={6} md={6} className='d-flex justify-content-end'><Link to='/shop' className='btn order_now'>Browse All Products</Link></Col>
             </Row>
             <Row className='py-4'>
 

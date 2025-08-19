@@ -89,8 +89,6 @@ const handleTabSelect = (key) => {
         }
     }
 
-
-
      if (isLoggedIn) {
     return <Navigate to="/" replace />;
   }

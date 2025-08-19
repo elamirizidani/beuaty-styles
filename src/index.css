@@ -211,4 +211,11 @@ a {
   .search-offcanvas {
     width: 95%;
   }
+
+
+  .icon-container {
+  height: 50px;
+  width: 50px;
+  font-size:24px
+}
 }
