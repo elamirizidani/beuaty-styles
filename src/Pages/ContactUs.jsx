@@ -76,7 +76,8 @@ const [isSubmitting, setIsSubmitting] = useState(false);
           </p>
           </Col>
           <Col md={6}>
-          <div className='d-flex justify-content-between mb-5'>
+
+          <div className='row justify-content-between mb-5'>
             <Col className='justify-content-center align-items-center d-flex flex-column' md={6}>
             <div className='icon-container'>
               <i class="bi bi-envelope-open"></i>
